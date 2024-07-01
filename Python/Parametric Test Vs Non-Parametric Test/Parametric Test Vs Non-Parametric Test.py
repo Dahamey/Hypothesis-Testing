@@ -62,10 +62,20 @@
 #     
 # * [4.8 $\chi^2$ Test for Independence](#4.8)
 #     * [4.8.1 Definition](#4.8.1)
-#     * [4.8.2 Example of $\chi^2$ Test for Independence](#4.8.2)
-# 
+#     * [4.8.2 Example of $\chi^2$ Test for Independence](#4.8.2) 
 #     
+# * [4.9 $\chi^2$ Goodness of Fit Test](#4.9)
+#     * [4.9.1 Definition](#4.9.1)
+#     * [4.9.2 Example of $\chi^2$ Goodness of Fit Test](#4.9.2)
 # 
+# * [4.10 Pearson Correlation](#4.10)
+#     * [4.10.1 Definition](#4.10.1)
+#     * [4.10.2 Example of Pearson Correlation](#4.10.2)
+#       
+# * [4.11 Spearman Correlation](#4.11)
+#     * [4.11.1 Definition](#4.11.1)
+#     * [4.11.2 Example of Spearman Correlation](#4.11.2)
+#     
 
 # <a id="0"></a>
 # 
@@ -1668,6 +1678,418 @@ print("Critical statistic : %.4f"%critical_stat)
 # #### <u>3. Decision and Conclusion</u>
 # 
 # Since the p-value is larger than $\alpha=0.01$ (or the calculated statistic of 7.09 is smaller than the critical statistic of 13.28), we fail to reject the null hypothesis $H_0$. At this significance level, it can be concluded that gender and risk appetite are independent.
+
+# <a id="4.9"></a>
+# 
+# # 4.9) $\chi^2$ Goodness of Fit Test
+# 
+# <a id="4.9.1"></a>
+# 
+# ## 4.9.1) Definition
+# 
+# * <u>**$\chi^2$ Goodness of Fit Test**</u> **:** This test is used to determine if a sample data matches a population with a specific distribution. It assesses whether the observed frequencies of categories differ from the expected frequencies under the specified theoretical distribution.
+# 
+# * **Observed Frequencies (O) :** These are the actual counts observed in each category of the sample data.
+# 
+# * **Expected Frequencies (E) :** These are the counts that would be expected under the specified theoretical distribution.
+# 
+# #### Assumptions
+# 
+# The Chi-Square Goodness of Fit Test has certain assumptions that need to be satisfied for the test to be valid. Here are the key assumptions:
+# 
+# 1. **Random Sampling :** The data should be collected through a random sampling method. Each observation should be independent of the others.
+# 
+# 2. **Categorical Data :** The variable being tested should be categorical. This means that the data should be in the form of frequencies or counts for each category.
+# 
+# 3. **Large Sample Size :** The sample size should be sufficiently large. Specifically, the expected frequency in each category should be at least 5 for the test to be reliable. If the expected frequencies are too small, the Chi-Square test may not be appropriate, and an alternative test should be considered.
+# 
+# #### Hypotheses
+# 
+# - **Null Hypothesis $(H_0)$ :** The sample data fits the specified theoretical distribution.
+# - **Alternative Hypothesis $(H_1)$ :** The sample data does not fit the specified theoretical distribution.
+# 
+# #### Test Statistic
+# 
+# The test statistic for the $\chi^2$ Goodness of Fit Test is calculated based on the differences between observed and expected frequencies in each category. It follows a $\chi^2$ distribution :
+# 
+# $$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$$
+# 
+# where $O_i$ is the observed frequency for the $i$-th category, and $E_i$ is the expected frequency for the $i$-th category.
+# 
+# #### Degrees of Freedom
+# 
+# The degrees of freedom for the test are calculated as :
+# 
+# $$df = k - 1$$
+# 
+# where $k$ is the number of categories.
+# 
+# <a id="4.9.2"></a>
+# 
+# ## 4.9.2) Example of $\chi^2$ Goodness of Fit Test
+# 
+# ![](colors.jpg)
+# 
+# An analyst wants to test if the colors of candies in a bag follow a specified distribution. The expected distribution is:
+# 
+# - Red: 30%
+# - Blue: 20%
+# - Green: 20%
+# - Yellow: 15%
+# - Orange: 15%
+# 
+# A random sample of 100 candies from the bag is taken, and the observed frequencies are recorded as follows:
+# 
+# - Red: 35
+# - Blue: 15
+# - Green: 20
+# - Yellow: 10
+# - Orange: 20
+# 
+# We want to test the hypothesis that the colors of candies in the bag follow the specified distribution. We use $\alpha = 0.05.$
+# 
+# #### <u>1. Defining Hypotheses</u>
+# 
+# * Null Hypothesis $H_0$ : "The colors of candies follow the specified distribution" 
+# 
+# * Alternative Hypothesis $H_1$ : "The colors of candies do not follow the specified distribution"
+# 
+# #### <u>2. Assumption Check and Selecting the proper test</u>
+# 
+# The chi-squared goodness of fit test should be used for this question. The assumption for this test, which requires that each expected frequency be at least 5 $(E_i\geq 5)$, is satisfied. For that, we use `scipy.stats`'s `chisquare`.
+# 
+
+# In[1]:
+
+
+from scipy.stats import chisquare
+
+# Observed frequencies
+observed = [35, 15, 20, 10, 20]
+
+# Expected frequencies based on the specified distribution
+expected = [30, 20, 20, 15, 15]
+
+chi2_stat, p_value = chisquare(f_obs=observed, f_exp=expected)
+
+print("Test statistic : %.4f" % chi2_stat)
+print("p-value : %.4f" % p_value)
+
+
+# #### <u>3. Decision and Conclusion</u>
+# 
+# Since the p-value is larger than $\alpha=0.05$, we fail to reject the null hypothesis $H_0$. At this significance level, it can be concluded that the colors of candies in the bag follow the specified distribution.
+
+# <a id="4.10"></a>
+# 
+# ## 4.10) Pearson Correlation
+# 
+# <a id="4.10.1"></a>
+# ### 4.10.1) Definition
+# 
+# * <u>**Pearson Correlation Coefficient**</u> **:** is a measure of the strength and direction of the linear relationship between **two continuous variables.** It is denoted by $r$ and ranges from -1 to 1.
+# 
+# #### Interpretation
+# 
+# - $r = 1$ : Perfect positive linear relationship
+# - $r = -1$ : Perfect negative linear relationship
+# - $r = 0$ : No linear relationship
+# - $0 < r < 1$ : Positive linear relationship
+# - $-1 < r < 0$ : Negative linear relationship
+# 
+# #### Assumptions
+# 
+# 1. **Linearity :** The relationship between the two variables should be linear.
+# 2. **Normality :** The variables should be approximately normally distributed.
+# 3. **Homoscedasticity :** The variance of the errors should be constant across all levels of the independent variable.
+# 4. **Independence :** The observations should be independent of each other.
+# 
+# #### Hypotheses
+# 
+# - **Null Hypothesis $(H_0)$ :** There is no linear relationship between the two variables ($\rho = 0$).
+# - **Alternative Hypothesis $(H_1)$ :** There is a linear relationship between the two variables ($\rho \neq 0$).
+# 
+# **NOTE :** $r$ is the sample correlation coefficient, which measures the strength and direction of the linear relationship between two variables in a **sample.** Meanwhile $\rho$ (the Greek letter rho) is the population correlation coefficient, which measures the strength and direction of the linear relationship between two variables in the **entire population.**
+# 
+# #### Test Statistic
+# 
+# The test statistic for the Pearson correlation is calculated as:
+# 
+# $$
+# r = \frac{{n \sum xy - (\sum x)(\sum y)}}{{\sqrt{[n \sum x^2 - (\sum x)^2][n \sum y^2 - (\sum y)^2]}}}
+# $$
+# 
+# where $n$ is the number of pairs, $x$ and $y$ are the variables.
+# 
+# #### p-Value
+# 
+# To test the significance of the Pearson correlation, the t-distribution is used:
+# 
+# $$
+# t = \frac{r \sqrt{n-2}}{\sqrt{1-r^2}}
+# $$
+# 
+# The degrees of freedom (df) are calculated as:
+# 
+# $$
+# df = n - 2
+# $$
+# 
+# <a id="4.10.2"></a>
+# ### Example of Pearson Correlation
+# 
+# ![](studies.jpg)
+# 
+# Suppose a researcher wants to investigate the relationship between the number of hours studied and the scores obtained in an exam by a group of students. The data collected is as follows:
+# 
+# | Hours Studied | Exam Score |
+# |---------------|------------|
+# |       1       |     50     |
+# |       2       |     55     |
+# |       3       |     60     |
+# |       4       |     65     |
+# |       5       |     70     |
+# |       6       |     75     |
+# |       7       |     80     |
+# |       8       |     85     |
+# |       9       |     90     |
+# |      10       |     95     |
+# 
+# Based on this information, let's conduct a hypothesis test to determine whether there is a significant linear relationship between the number of hours studied and the exam scores.
+# 
+# #### <u>1. Defining Hypotheses</u>
+# 
+# * Null Hypothesis $H_0$ : "There is no linear relationship between the number of hours studied and the exam scores" 
+# 
+# $$H_0 : \rho = 0$$
+# 
+# * Alternative Hypothesis $H_1$ : "There is a linear relationship between the number of hours studied and the exam scores"
+# 
+# $$H_1 : \rho \neq 0$$
+# 
+# #### <u>2. Assumption Check</u>
+# 
+# * **Linearity :**
+# 
+# $H_0 :$ "The relationship between the variables is linear"
+# 
+# $H_1 :$ "The relationship between the variables is **NOT** linear"
+# 
+# * **Normality :**
+# 
+# $H_0 :$ "The data is normally distributed"
+# 
+# $H_1 :$ "The data is **NOT** normally distributed"
+# 
+# * **Homoscedasticity :**
+# 
+# $H_0 :$ "The variance of the errors is constant across all levels of the independent variable"
+# 
+# $H_1 :$ "The variance of the errors is **NOT** constant across all levels of the independent variable"
+# 
+
+# In[4]:
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import pearsonr, shapiro, bartlett
+
+# Data
+hours_studied = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+exam_scores = np.array([50, 55, 60, 65, 70, 75, 80, 85, 90, 95])
+
+# Linearity Check
+plt.scatter(hours_studied, exam_scores)
+plt.title('Scatter plot of Hours Studied vs Exam Scores')
+plt.xlabel('Hours Studied')
+plt.ylabel('Exam Scores')
+plt.show()
+
+# Normality Check
+stat, p_value_normality = shapiro(exam_scores)
+print("p-value for Normality : %.4f" % p_value_normality)
+if p_value_normality < 0.05 :
+    print("Reject the null hypothesis => The data is not normally distributed")
+else :
+    print("Fail to reject the null hypothesis => The data is normally distributed")
+
+# Homoscedasticity Check
+stat, p_value_homoscedasticity = bartlett(hours_studied, exam_scores)
+print("p-value for Homoscedasticity : %.4f" % p_value_homoscedasticity)
+if p_value_homoscedasticity < 0.05 :
+    print("Reject the null hypothesis => The variances are not constant")
+else :
+    print("Fail to reject the null hypothesis => The variances are constant")
+
+
+# #### <u>3. Conducting the Pearson Correlation Test</u>
+# Since the assumptions are satisfied, we can proceed with the Pearson correlation test. For that, we use `scipy.stats`'s `pearsonr`.
+
+# In[5]:
+
+
+# Performing Pearson Correlation Test
+r, p_value = pearsonr(hours_studied, exam_scores)
+print("Pearson correlation coefficient : %.4f" % r)
+print("p-value : %.4f" % p_value)
+if p_value < 0.05 :
+    print("Reject the null hypothesis")
+else :
+    print("Fail to reject the null hypothesis")
+
+
+# #### <u>4. Decision and Conclusion</u>
+# At this significance level (of 0.05), it can be concluded that there is a significant linear relationship between the number of hours studied and the exam scores.
+
+# <a id="4.11"></a>
+# 
+# ## 4.11) Spearman Correlation
+# 
+# <a id="4.11.1"></a>
+# ### 4.11.1) Definition
+# 
+# * <u>**Spearman's Rank Correlation Coefficient**</u> **:** is a non-parametric measure of the strength and direction of the association between two ranked variables. It assesses how well the relationship between two variables can be described using a monotonic function. Spearman's correlation coefficient is denoted by $\rho$ (rho) or $r_s$. Here's a step-by-step explanation:
+# 
+# 1. **Combine the Samples :** First, combine all the observations from both variables into a single sample.
+# 
+# 2. **Rank the Observations :** Assign ranks to the combined sample. The smallest observation gets rank 1, the next smallest gets rank 2, and so on. If there are tied values (observations with the same value), each tied value is assigned the average of the ranks they would have received if they were not tied.
+# 
+# 3. **Calculate the Differences :** For each pair of observations, calculate the difference between their ranks.
+# 
+# 4. **Square the Differences :** Square each of the rank differences.
+# 
+# 5. **Sum of Squared Differences :** Calculate the sum of the squared rank differences, denoted as $ d_i^2 $.
+# 
+# 6. **Spearman's Rank Correlation Coefficient Formula :** Use the formula to calculate the Spearman's rank correlation coefficient $ r_s $:
+# 
+# $$
+# r_s = 1 - \frac{{6 \sum d_i^2}}{{n(n^2 - 1)}}
+# $$
+# 
+# where $d_i$ is the difference between ranks for each pair of observations, and $n$ is the number of observations.
+# 
+# 7. **Interpret the Result :** The value of $ r_s$ will range between -1 and 1. An $ r_s $ close to 1 indicates a strong positive monotonic relationship, while an $r_s$ close to -1 indicates a strong negative monotonic relationship. An $ r_s $ close to 0 suggests no monotonic relationship.
+# 
+# Spearman correlation is the non-parametric counterpart to the Pearson correlation and is used when the assumptions of Pearson correlation are not met, such as non-normality or ordinal data.
+# 
+# #### Interpretation
+# 
+# - $r_s = 1$ : Perfect positive monotonic relationship
+# - $ r_s = -1 $ : Perfect negative monotonic relationship
+# - $ r_s = 0 $ : No monotonic relationship
+# - $ 0 < r_s < 1 $ : Positive monotonic relationship
+# - $ -1 < r_s < 0 $ : Negative monotonic relationship
+# 
+# #### Assumptions
+# 
+# 1. **Monotonicity :** The relationship between the two variables should be monotonic (either consistently increasing or consistently decreasing).
+# 2. **Ordinal, Interval, or Ratio Data :** The data can be ordinal, interval, or ratio, but the relationship must be monotonic.
+# 
+# #### Hypotheses
+# 
+# - **Null Hypothesis $(H_0)$ :** There is no monotonic relationship between the two variables ($\rho = 0$).
+# - **Alternative Hypothesis $(H_1)$ :** There is a monotonic relationship between the two variables ($ \rho \neq 0 $).
+# 
+# #### Test Statistic
+# 
+# The test statistic for Spearman correlation is calculated as:
+# 
+# $$
+# \rho = 1 - \frac{{6 \sum d_i^2}}{{n(n^2 - 1)}}
+# $$
+# 
+# where $d_i $ is the difference between the ranks of corresponding values and $ n$ is the number of pairs.
+# 
+# #### p-Value
+# 
+# To test the significance of the Spearman correlation, the t-distribution is used:
+# 
+# $$
+# t = \frac{r_s \sqrt{n-2}}{\sqrt{1-r_s^2}}
+# $$
+# 
+# The degrees of freedom (df) are calculated as:
+# 
+# $$
+# df = n - 2
+# $$
+# 
+# <a id="4.11.2"></a>
+# ### 4.11.2) Example of Spearman Correlation
+# 
+# ![](customer.jpg)
+# 
+# Suppose a researcher wants to examine the relationship between the ranks of customer satisfaction and the ranks of customer loyalty in a study of various companies. The following ranks are collected:
+# 
+# | Company | Satisfaction Rank | Loyalty Rank |
+# |---------|-------------------|--------------|
+# | A       | 8                 | 7            |
+# | B       | 6                 | 5            |
+# | C       | 3                 | 2            |
+# | D       | 9                 | 8            |
+# | E       | 5                 | 4            |
+# | F       | 7                 | 6            |
+# | G       | 2                 | 1            |
+# | H       | 4                 | 3            |
+# | I       | 10                | 9            |
+# | J       | 1                 | 10           |
+# 
+# #### <u>1. Defining Hypotheses</u>
+# 
+# * Null Hypothesis $ H_0 $ : "There is no monotonic relationship between customer satisfaction ranks and customer loyalty ranks"
+# 
+# $$H_0 : \rho = 0$$
+# 
+# * Alternative Hypothesis $ H_1 $ : "There is a monotonic relationship between customer satisfaction ranks and customer loyalty ranks"
+# 
+# $$H_1 : \rho \neq 0$$
+# 
+# #### <u>2. Assumption Check</u>
+# 
+# * **Monotonicity :**
+# 
+#   $H_0 :$ "The relationship between customer satisfaction and customer loyalty ranks is monotonic"
+# 
+#   $H_1 :$ "The relationship between customer satisfaction and customer loyalty ranks is **NOT** monotonic"
+# 
+# #### <u>3. Python Implementation</u>
+# 
+# Let's calculate the Spearman correlation coefficient using Python:
+# 
+# 
+# 
+
+# In[8]:
+
+
+import numpy as np
+from scipy.stats import spearmanr
+
+# Data
+satisfaction_ranks = np.array([8, 6, 3, 9, 5, 7, 2, 4, 10, 1])
+loyalty_ranks = np.array([7, 5, 2, 8, 4, 6, 1, 3, 9, 10])
+
+# Calculate Spearman correlation
+rho, p_value = spearmanr(satisfaction_ranks, loyalty_ranks)
+
+print(f"Spearman correlation coefficient: {rho:.4f}")
+print(f"P-value: {p_value:.4f}")
+
+if p_value < 0.05:
+    print("Reject the null hypothesis")
+else:
+    print("Fail to reject the null hypothesis")
+
+
+# #### <u>4. Decision and Conclusion</u>
+# Based on the calculated Spearman correlation coefficient and p-value:
+# 
+# Spearman correlation coefficient: 0.4424
+# 
+# P-value: 0.1869
+# 
+# At a significance level of 0.05, with a Spearman correlation coefficient of 0.4424, we fail to reject the null hypothesis ($H_0: \rho = 0$). Therefore, there is insufficient evidence to conclude a significant monotonic relationship between the ranks of customer satisfaction and customer loyalty in this study.
 
 # # Change Log
 # 

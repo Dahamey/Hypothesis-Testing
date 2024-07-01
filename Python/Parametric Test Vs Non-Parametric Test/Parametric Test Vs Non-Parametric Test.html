@@ -14698,6 +14698,24 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <li><a href="#4.8.2">4.8.2 Example of $\chi^2$ Test for Independence</a></li>
 </ul>
 </li>
+<li><p><a href="#4.9">4.9 $\chi^2$ Goodness of Fit Test</a></p>
+<ul>
+<li><a href="#4.9.1">4.9.1 Definition</a></li>
+<li><a href="#4.9.2">4.9.2 Example of $\chi^2$ Goodness of Fit Test</a></li>
+</ul>
+</li>
+<li><p><a href="#4.10">4.10 Pearson Correlation</a></p>
+<ul>
+<li><a href="#4.10.1">4.10.1 Definition</a></li>
+<li><a href="#4.10.2">4.10.2 Example of Pearson Correlation</a></li>
+</ul>
+</li>
+<li><p><a href="#4.11">4.11 Spearman Correlation</a></p>
+<ul>
+<li><a href="#4.11.1">4.11.1 Definition</a></li>
+<li><a href="#4.11.2">4.11.2 Example of Spearman Correlation</a></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -17944,6 +17962,613 @@ p-value : 0.1310
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="3.-Decision-and-Conclusion"><u>3. Decision and Conclusion</u><a class="anchor-link" href="#3.-Decision-and-Conclusion">&#182;</a></h4><p>Since the p-value is larger than $\alpha=0.01$ (or the calculated statistic of 7.09 is smaller than the critical statistic of 13.28), we fail to reject the null hypothesis $H_0$. At this significance level, it can be concluded that gender and risk appetite are independent.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><a id="4.9"></a></p>
+<h1 id="4.9)-$%5Cchi%5E2$-Goodness-of-Fit-Test">4.9) $\chi^2$ Goodness of Fit Test<a class="anchor-link" href="#4.9)-$%5Cchi%5E2$-Goodness-of-Fit-Test">&#182;</a></h1><p><a id="4.9.1"></a></p>
+<h2 id="4.9.1)-Definition">4.9.1) Definition<a class="anchor-link" href="#4.9.1)-Definition">&#182;</a></h2><ul>
+<li><p><u><strong>$\chi^2$ Goodness of Fit Test</strong></u> <strong>:</strong> This test is used to determine if a sample data matches a population with a specific distribution. It assesses whether the observed frequencies of categories differ from the expected frequencies under the specified theoretical distribution.</p>
+</li>
+<li><p><strong>Observed Frequencies (O) :</strong> These are the actual counts observed in each category of the sample data.</p>
+</li>
+<li><p><strong>Expected Frequencies (E) :</strong> These are the counts that would be expected under the specified theoretical distribution.</p>
+</li>
+</ul>
+<h4 id="Assumptions">Assumptions<a class="anchor-link" href="#Assumptions">&#182;</a></h4><p>The Chi-Square Goodness of Fit Test has certain assumptions that need to be satisfied for the test to be valid. Here are the key assumptions:</p>
+<ol>
+<li><p><strong>Random Sampling :</strong> The data should be collected through a random sampling method. Each observation should be independent of the others.</p>
+</li>
+<li><p><strong>Categorical Data :</strong> The variable being tested should be categorical. This means that the data should be in the form of frequencies or counts for each category.</p>
+</li>
+<li><p><strong>Large Sample Size :</strong> The sample size should be sufficiently large. Specifically, the expected frequency in each category should be at least 5 for the test to be reliable. If the expected frequencies are too small, the Chi-Square test may not be appropriate, and an alternative test should be considered.</p>
+</li>
+</ol>
+<h4 id="Hypotheses">Hypotheses<a class="anchor-link" href="#Hypotheses">&#182;</a></h4><ul>
+<li><strong>Null Hypothesis $(H_0)$ :</strong> The sample data fits the specified theoretical distribution.</li>
+<li><strong>Alternative Hypothesis $(H_1)$ :</strong> The sample data does not fit the specified theoretical distribution.</li>
+</ul>
+<h4 id="Test-Statistic">Test Statistic<a class="anchor-link" href="#Test-Statistic">&#182;</a></h4><p>The test statistic for the $\chi^2$ Goodness of Fit Test is calculated based on the differences between observed and expected frequencies in each category. It follows a $\chi^2$ distribution :</p>
+$$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$$<p>where $O_i$ is the observed frequency for the $i$-th category, and $E_i$ is the expected frequency for the $i$-th category.</p>
+<h4 id="Degrees-of-Freedom">Degrees of Freedom<a class="anchor-link" href="#Degrees-of-Freedom">&#182;</a></h4><p>The degrees of freedom for the test are calculated as :</p>
+$$df = k - 1$$<p>where $k$ is the number of categories.</p>
+<p><a id="4.9.2"></a></p>
+<h2 id="4.9.2)-Example-of-$%5Cchi%5E2$-Goodness-of-Fit-Test">4.9.2) Example of $\chi^2$ Goodness of Fit Test<a class="anchor-link" href="#4.9.2)-Example-of-$%5Cchi%5E2$-Goodness-of-Fit-Test">&#182;</a></h2><p><img src="colors.jpg" alt="" /></p>
+<p>An analyst wants to test if the colors of candies in a bag follow a specified distribution. The expected distribution is:</p>
+<ul>
+<li>Red: 30%</li>
+<li>Blue: 20%</li>
+<li>Green: 20%</li>
+<li>Yellow: 15%</li>
+<li>Orange: 15%</li>
+</ul>
+<p>A random sample of 100 candies from the bag is taken, and the observed frequencies are recorded as follows:</p>
+<ul>
+<li>Red: 35</li>
+<li>Blue: 15</li>
+<li>Green: 20</li>
+<li>Yellow: 10</li>
+<li>Orange: 20</li>
+</ul>
+<p>We want to test the hypothesis that the colors of candies in the bag follow the specified distribution. We use $\alpha = 0.05.$</p>
+<h4 id="1.-Defining-Hypotheses"><u>1. Defining Hypotheses</u><a class="anchor-link" href="#1.-Defining-Hypotheses">&#182;</a></h4><ul>
+<li><p>Null Hypothesis $H_0$ : &quot;The colors of candies follow the specified distribution&quot;</p>
+</li>
+<li><p>Alternative Hypothesis $H_1$ : &quot;The colors of candies do not follow the specified distribution&quot;</p>
+</li>
+</ul>
+<h4 id="2.-Assumption-Check-and-Selecting-the-proper-test"><u>2. Assumption Check and Selecting the proper test</u><a class="anchor-link" href="#2.-Assumption-Check-and-Selecting-the-proper-test">&#182;</a></h4><p>The chi-squared goodness of fit test should be used for this question. The assumption for this test, which requires that each expected frequency be at least 5 $(E_i\geq 5)$, is satisfied. For that, we use <code>scipy.stats</code>'s <code>chisquare</code>.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chisquare</span>
+
+<span class="c1"># Observed frequencies</span>
+<span class="n">observed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+
+<span class="c1"># Expected frequencies based on the specified distribution</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+
+<span class="n">chi2_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">chisquare</span><span class="p">(</span><span class="n">f_obs</span><span class="o">=</span><span class="n">observed</span><span class="p">,</span> <span class="n">f_exp</span><span class="o">=</span><span class="n">expected</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test statistic : </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">chi2_stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p-value : </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">p_value</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Test statistic : 5.4167
+p-value : 0.2472
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="3.-Decision-and-Conclusion"><u>3. Decision and Conclusion</u><a class="anchor-link" href="#3.-Decision-and-Conclusion">&#182;</a></h4><p>Since the p-value is larger than $\alpha=0.05$, we fail to reject the null hypothesis $H_0$. At this significance level, it can be concluded that the colors of candies in the bag follow the specified distribution.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><a id="4.10"></a></p>
+<h2 id="4.10)-Pearson-Correlation">4.10) Pearson Correlation<a class="anchor-link" href="#4.10)-Pearson-Correlation">&#182;</a></h2><p><a id="4.10.1"></a></p>
+<h3 id="4.10.1)-Definition">4.10.1) Definition<a class="anchor-link" href="#4.10.1)-Definition">&#182;</a></h3><ul>
+<li><u><strong>Pearson Correlation Coefficient</strong></u> <strong>:</strong> is a measure of the strength and direction of the linear relationship between <strong>two continuous variables.</strong> It is denoted by $r$ and ranges from -1 to 1.</li>
+</ul>
+<h4 id="Interpretation">Interpretation<a class="anchor-link" href="#Interpretation">&#182;</a></h4><ul>
+<li>$r = 1$ : Perfect positive linear relationship</li>
+<li>$r = -1$ : Perfect negative linear relationship</li>
+<li>$r = 0$ : No linear relationship</li>
+<li>$0 &lt; r &lt; 1$ : Positive linear relationship</li>
+<li>$-1 &lt; r &lt; 0$ : Negative linear relationship</li>
+</ul>
+<h4 id="Assumptions">Assumptions<a class="anchor-link" href="#Assumptions">&#182;</a></h4><ol>
+<li><strong>Linearity :</strong> The relationship between the two variables should be linear.</li>
+<li><strong>Normality :</strong> The variables should be approximately normally distributed.</li>
+<li><strong>Homoscedasticity :</strong> The variance of the errors should be constant across all levels of the independent variable.</li>
+<li><strong>Independence :</strong> The observations should be independent of each other.</li>
+</ol>
+<h4 id="Hypotheses">Hypotheses<a class="anchor-link" href="#Hypotheses">&#182;</a></h4><ul>
+<li><strong>Null Hypothesis $(H_0)$ :</strong> There is no linear relationship between the two variables ($\rho = 0$).</li>
+<li><strong>Alternative Hypothesis $(H_1)$ :</strong> There is a linear relationship between the two variables ($\rho \neq 0$).</li>
+</ul>
+<p><strong>NOTE :</strong> $r$ is the sample correlation coefficient, which measures the strength and direction of the linear relationship between two variables in a <strong>sample.</strong> Meanwhile $\rho$ (the Greek letter rho) is the population correlation coefficient, which measures the strength and direction of the linear relationship between two variables in the <strong>entire population.</strong></p>
+<h4 id="Test-Statistic">Test Statistic<a class="anchor-link" href="#Test-Statistic">&#182;</a></h4><p>The test statistic for the Pearson correlation is calculated as:</p>
+$$
+r = \frac{{n \sum xy - (\sum x)(\sum y)}}{{\sqrt{[n \sum x^2 - (\sum x)^2][n \sum y^2 - (\sum y)^2]}}}
+$$<p>where $n$ is the number of pairs, $x$ and $y$ are the variables.</p>
+<h4 id="p-Value">p-Value<a class="anchor-link" href="#p-Value">&#182;</a></h4><p>To test the significance of the Pearson correlation, the t-distribution is used:</p>
+$$
+t = \frac{r \sqrt{n-2}}{\sqrt{1-r^2}}
+$$<p>The degrees of freedom (df) are calculated as:</p>
+$$
+df = n - 2
+$$<p><a id="4.10.2"></a></p>
+<h3 id="Example-of-Pearson-Correlation">Example of Pearson Correlation<a class="anchor-link" href="#Example-of-Pearson-Correlation">&#182;</a></h3><p><img src="studies.jpg" alt="" /></p>
+<p>Suppose a researcher wants to investigate the relationship between the number of hours studied and the scores obtained in an exam by a group of students. The data collected is as follows:</p>
+<table>
+<thead>
+<tr>
+  <th>Hours Studied</th>
+  <th>Exam Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>50</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>55</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>60</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>65</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>70</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>80</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>85</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>95</td>
+</tr>
+</tbody>
+</table>
+<p>Based on this information, let's conduct a hypothesis test to determine whether there is a significant linear relationship between the number of hours studied and the exam scores.</p>
+<h4 id="1.-Defining-Hypotheses"><u>1. Defining Hypotheses</u><a class="anchor-link" href="#1.-Defining-Hypotheses">&#182;</a></h4><ul>
+<li>Null Hypothesis $H_0$ : &quot;There is no linear relationship between the number of hours studied and the exam scores&quot;</li>
+</ul>
+$$H_0 : \rho = 0$$<ul>
+<li>Alternative Hypothesis $H_1$ : &quot;There is a linear relationship between the number of hours studied and the exam scores&quot;</li>
+</ul>
+$$H_1 : \rho \neq 0$$<h4 id="2.-Assumption-Check"><u>2. Assumption Check</u><a class="anchor-link" href="#2.-Assumption-Check">&#182;</a></h4><ul>
+<li><strong>Linearity :</strong></li>
+</ul>
+<p>$H_0 :$ &quot;The relationship between the variables is linear&quot;</p>
+<p>$H_1 :$ &quot;The relationship between the variables is <strong>NOT</strong> linear&quot;</p>
+<ul>
+<li><strong>Normality :</strong></li>
+</ul>
+<p>$H_0 :$ &quot;The data is normally distributed&quot;</p>
+<p>$H_1 :$ &quot;The data is <strong>NOT</strong> normally distributed&quot;</p>
+<ul>
+<li><strong>Homoscedasticity :</strong></li>
+</ul>
+<p>$H_0 :$ &quot;The variance of the errors is constant across all levels of the independent variable&quot;</p>
+<p>$H_1 :$ &quot;The variance of the errors is <strong>NOT</strong> constant across all levels of the independent variable&quot;</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span><span class="p">,</span> <span class="n">shapiro</span><span class="p">,</span> <span class="n">bartlett</span>
+
+<span class="c1"># Data</span>
+<span class="n">hours_studied</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">exam_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
+
+<span class="c1"># Linearity Check</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hours_studied</span><span class="p">,</span> <span class="n">exam_scores</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Scatter plot of Hours Studied vs Exam Scores&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hours Studied&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Exam Scores&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Normality Check</span>
+<span class="n">stat</span><span class="p">,</span> <span class="n">p_value_normality</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">exam_scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p-value for Normality : </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">p_value_normality</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">p_value_normality</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reject the null hypothesis =&gt; The data is not normally distributed&quot;</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fail to reject the null hypothesis =&gt; The data is normally distributed&quot;</span><span class="p">)</span>
+
+<span class="c1"># Homoscedasticity Check</span>
+<span class="n">stat</span><span class="p">,</span> <span class="n">p_value_homoscedasticity</span> <span class="o">=</span> <span class="n">bartlett</span><span class="p">(</span><span class="n">hours_studied</span><span class="p">,</span> <span class="n">exam_scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p-value for Homoscedasticity : </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">p_value_homoscedasticity</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">p_value_homoscedasticity</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reject the null hypothesis =&gt; The variances are not constant&quot;</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fail to reject the null hypothesis =&gt; The variances are constant&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output ">
+<img src="data:image/png;base64,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+usv3XPPPTp06JCee+45hYaG6tNPP1W/fv105swZDR8+XJUqVVJMTIwGDx6srl27qlu3bpKkO++8M99akpOT1bx5c50/f17Dhg1TxYoVtXDhQj300ENatmyZunbtqlatWumjjz7SE088oXbt2qlPnz43fI7SlQ/ikydP5mo/e/ZsrrZ169apY8eOqlatmiZOnKi//vpLs2fPVosWLbRz5848w4sjNmzYoE8++UTPPfecbrvtNlWtWlVr165Vr169dN9992nGjBmSpP3792vz5s0aPnx4vusKCQmRJP373//WP//5z3zfq6efflonTpzQ2rVr9dFHH91U3ZK0Zs0ade/eXeHh4Zo+fbpOnTplCwM3kpycrGbNmtm+wCpVqqSVK1dq4MCBSk9Pt51q/euvv3Tffffp2LFjGjZsmIKDg/XRRx9pw4YNN9zGAw88IC8vL33yySdq3bq13bKlS5eqbt26tr/17t27a9++fRo6dKiqVq2qlJQUrV27VseOHXPovU1NTc3VVqZMGdt/jN5++21t2LBBffv21ZYtW+Tq6qr3339fa9as0UcffWQ75ffbb79p+fLlevjhhxUaGqrk5GS9//77at26teLj4239ckyfPl2enp4aO3asDh06pNmzZ6ts2bJycXHR6dOnNXHiRG3dulULFixQaGioJkyYkO9z8Pf3l6enp1asWKGhQ4fKz88v375ZWVl68MEHtX79evXs2VPDhw9XRkaG1q5dq7i4OIWFhckwDD300EPauHGjBg4cqPr162v16tV6/vnn9ccff9g+83Lk9bfg6H7ywQcfaNiwYerRo4eGDx+uzMxM/fzzz9q2bVuuo5P4PwZuOWvWrDFcXV0NV1dXIzIy0njhhReM1atXGxcvXrTrd/DgQcPFxcXo2rWrkZWVZbcsOzvb9u/z58/n2sbTTz9tlCtXzsjMzLS1PfDAA0ZISEiuvtu3bzckGfPnz8+1jRo1ahjt27fPtb3Q0FCjXbt2trbo6GhDktGrVy+HXoP58+cbkoxGjRrZPe+ZM2cakowvv/zS1ta6dWujdevWtvtvvfWWIclYtGiRre3ixYtGZGSk4eXlZaSnpxuGYRh//vmnIcmIjo52qKYRI0YYkowffvjB1paRkWGEhoYaVatWtXsPJBlDhgxxaL2Sbnjbvn27rX/9+vUNf39/49SpU7a2PXv2GC4uLkafPn1sbX379s3z/cx5L66twcXFxdi3b59d+/Dhww0fHx/j8uXLDj2XHOfPnzdq1aplSDJCQkKMfv36GfPmzTOSk5Nz9R0yZEiuegzDMDZu3GhIMjZu3GjXnpCQkGt/rF+/vhEUFGScOXPG1rZmzRrb9q99rle/5wMHDjSCgoKMkydP2vXr2bOnYbVabX8/OfvVJ598Yutz7tw5o3r16nnWea1evXoZ/v7+dq9lYmKi4eLiYrz88suGYRjG6dOnDUnGq6++et115SXnfc3rVqtWLbu+q1evNiQZU6ZMMX777TfDy8vL6NKli12fzMzMXJ8rCQkJhru7u61ew/jf+xQREWH3t9qrVy/DYrEYHTt2tFtHZGRknvvltSZMmGBIMsqXL2907NjRmDp1qrFjx45c/T788ENDkvHGG2/kWpbzubR8+XLb871ajx49DIvFYhw6dMjWlt/fgqP7SefOnY26deve8Pnhfzi1dAtq166dtmzZooceekh79uzRzJkz1b59e91+++366quvbP2WL1+u7OxsTZgwQS4u9rvC1f8D9vT0tP07IyNDJ0+e1N13363z58/rl19+uek6d+/erYMHD+qxxx7TqVOndPLkSZ08eVLnzp3Tfffdp++//17Z2dl2j3nmmWcKtI1BgwapbNmytvuDBw9WmTJl9O233+b7mG+//VaBgYHq1auXra1s2bIaNmyYzp49m+fhfUd8++23atKkid0pMS8vLw0aNEhHjhxRfHz8Ta1Xkjp37qy1a9fmuj3//PN2/RITE7V7927169fP7n+pd955p9q1a3fd1+VGWrdurfDwcLs2X19fnTt3TmvXri3Qujw9PbVt2zZb/QsWLNDAgQMVFBSkoUOHOnQ6xlE5r0nfvn1ltVpt7e3atcv1fK5lGIY+++wzRUVFyTAM2z588uRJtW/fXmlpadq5c6ekK+9/UFCQevToYXt8uXLlNGjQIIfqfPTRR5WSkmJ3qmzZsmXKzs7Wo48+KunK6+bm5qbvvvvOoVOoefnss89y7Ufz58+363P//ffr6aef1ssvv6xu3brJw8ND77//vl0fd3d32+dKVlaWTp06JS8vL9WqVcv2mlytT58+dn+rTZs2lWEYGjBggF2/pk2b6vjx47p8+fJ1n8ekSZO0ZMkSNWjQQKtXr9ZLL72kRo0aqWHDhnanxT777DPddttt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QMlGkAGcLCvb0KQV8crr9+Rz2iatiFdWNr84DwDXIsgAThabkJrrSMzVDEmJaZmKTUgtvqIAwCQIMoCTpWTkH2Juph8AlCYEGcDJ/L09CrUfAJQmBBnAyZqE+inI6qH8JllbdGX2UpNQv+IsCwBMgSADOJmri0XRUeGSlCvM5NyPjgrnejIAkAeCDFACdIgIUkzvhgq02p8+CrR6KKZ3Q64jAwD54IJ4QAnRISJI7cIDubIvABQAQQYoQVxdLIoMq+jsMgDANDi1BAAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATKuMswsACkNWtqHYhFSlZGTK39tDTUL95OpicXZZAIAi5vQjMn/88Yd69+6tihUrytPTU/Xq1dN///tf23LDMDRhwgQFBQXJ09NTbdu21cGDB51YMUqaVXGJajljg3p9sFXDP96tXh9sVcsZG7QqLtHZpQEAiphTg8zp06fVokULlS1bVitXrlR8fLxef/11VahQwdZn5syZmjVrlt577z1t27ZN5cuXV/v27ZWZmenEylFSrIpL1OBFO5WYZr8/JKVlavCinYQZALjFWQzDMJy18bFjx2rz5s364Ycf8lxuGIaCg4M1evRojRkzRpKUlpamgIAALViwQD179rzhNtLT02W1WpWWliYfH59CrR/OlZVtqOWMDblCTA6LpECrh358sQ2nmQDAZBz9/nbqEZmvvvpKjRs31sMPPyx/f381aNBAH3zwgW15QkKCkpKS1LZtW1ub1WpV06ZNtWXLljzXeeHCBaWnp9vdcGuKTUjNN8RIkiEpMS1TsQmpxVcUAKBYOTXI/Pbbb4qJiVGNGjW0evVqDR48WMOGDdPChQslSUlJSZKkgIAAu8cFBATYll1r+vTpslqttluVKlWK9knAaVIyHDu96Gg/AID5ODXIZGdnq2HDhpo2bZoaNGigQYMG6amnntJ777130+scN26c0tLSbLfjx48XYsUoSfy9PQq1HwDAfJwaZIKCghQeHm7XVqdOHR07dkySFBgYKElKTk6265Oc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nsePH9cjjzwiX19f+fn5qXPnzjpy5IhteVZWlkaNGiVfX19VrFhRL7zwgvh1GKBwEGQAOGTHjh165JFH1LNnT+3du1cTJ07U+PHjbSGlIMaOHavhw4dr//79at++vYYMGaILFy7o+++/1969ezVjxgx5eXnl+dhKlSrJxcVFy5YtU1ZWVp59YmNjJUnr1q1TYmKiPv/8c4dr69evn44fP66NGzdq2bJlmjNnjlJSUvLtf+nSJbVv317e3t764YcftHnzZnl5ealDhw66ePGiJOn111/XggUL9OGHH+rHH39UamqqvvjiC4drApA/Ti0B0Ndff50rOFwbEt544w3dd999Gj9+vCSpZs2aio+P16uvvmp3RMMRI0aMULdu3Wz3jx07pu7du6tevXqSpGrVquX72Ntvv12zZs3SCy+8oEmTJqlx48a699579fjjj9seV6lSJUlSxYoVC3Qa6Ndff9XKlSsVGxuru+66S5I0b9481alTJ9/HLF26VNnZ2frXv/4li8UiSZo/f758fX313Xff6f7779dbb72lcePG2Z7ze++9p9WrVztcF4D8cUQGgO69917t3r3b7vavf/3Lrs/+/fvVokULu7YWLVro4MGD+R4ZyU/jxo3t7g8bNkxTpkxRixYtFB0drZ9//vm6jx8yZIiSkpK0ePFiRUZG6tNPP1XdunW1du3aAtVxrf3796tMmTJq1KiRra127dry9fXN9zF79uzRoUOH5O3tLS8vL3l5ecnPz0+ZmZk6fPiw0tLSlJiYqKZNm9oeU6ZMmVyvAYCbQ5ABoPLly6t69ep2t9tvv73A67FYLLnGfly6dCnP7V3tySef1G+//aYnnnhCe/fuVePGjTV79uzrbsvb21tRUVGaOnWq9uzZo7vvvltTpky57mNcXFwcqq8gzp49q0aNGuUKgr/++qsee+yxv7VuADdGkAHgkDp16mjz5s12bZs3b1bNmjXl6uoq6copncTERNvygwcP6vz58w6tv0qVKnrmmWf0+eefa/To0frggw8crs1isah27do6d+6cJMnNzU1S7tNj19aXlZWluLg42/3atWvr8uXL2rFjh63twIED150N1bBhQx08eFD+/v65wqDVapXValVQUJC2bdtme8y12wBw8wgyABwyevRorV+/XpMnT9avv/6qhQsX6p133tGYMWNsfdq0aaN33nlHu3bt0n//+18988wzDk2tHjFihFavXq2EhATt3LlTGzduzHdcyu7du9W5c2ctW7ZM8fHxOnTokObNm6cPP/xQnTt3liT5+/vL09NTq1atUnJystLS0mz1ffPNN/rmm2/0yy+/aPDgwXYhpVatWurQoYOefvppbdu2TTt27NCTTz4pT0/PfGt//PHHddttt6lz58764YcflJCQoO+++07Dhg3T77//LkkaPny4XnnlFS1fvly//PKLnn322RJ5fR7AjAgyABzSsGFDffLJJ/r4448VERGhCRMm6OWXX7Yb6Pv666+rSpUquvvuu/XYY49pzJgxKleu3A3XnZWVpSFDhqhOnTrq0KGDatasqTlz5uTZt3LlyqpataomTZqkpk2bqmHDhnr77bc1adIkvfTSS5KujEGZNWuW3n//fQUHB9sCzoABA9S3b1/16dNHrVu3VrVq1XTvvffarX/+/PkKDg5W69at1a1bNw0aNEj+/v751l6uXDl9//33uuOOO9StWzfVqVNHAwcOVGZmpnx8fCRdCYFPPPGE+vbtq8jISHl7e6tr1643fF0A3JjF4GIGAADApDgiAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATIsgAwAATOv/A6Af5XL6I/aKAAAAAElFTkSuQmCC"
+class="
+"
+>
+</div>
+
+</div>
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>p-value for Normality : 0.8924
+Fail to reject the null hypothesis =&gt; The data is normally distributed
+p-value for Homoscedasticity : 0.0001
+Reject the null hypothesis =&gt; The variances are not constant
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="3.-Conducting-the-Pearson-Correlation-Test"><u>3. Conducting the Pearson Correlation Test</u><a class="anchor-link" href="#3.-Conducting-the-Pearson-Correlation-Test">&#182;</a></h4><p>Since the assumptions are satisfied, we can proceed with the Pearson correlation test. For that, we use <code>scipy.stats</code>'s <code>pearsonr</code>.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Performing Pearson Correlation Test</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">hours_studied</span><span class="p">,</span> <span class="n">exam_scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pearson correlation coefficient : </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p-value : </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">p_value</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reject the null hypothesis&quot;</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fail to reject the null hypothesis&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Pearson correlation coefficient : 1.0000
+p-value : 0.0000
+Reject the null hypothesis
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="4.-Decision-and-Conclusion"><u>4. Decision and Conclusion</u><a class="anchor-link" href="#4.-Decision-and-Conclusion">&#182;</a></h4><p>At this significance level (of 0.05), it can be concluded that there is a significant linear relationship between the number of hours studied and the exam scores.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><a id="4.11"></a></p>
+<h2 id="4.11)-Spearman-Correlation">4.11) Spearman Correlation<a class="anchor-link" href="#4.11)-Spearman-Correlation">&#182;</a></h2><p><a id="4.11.1"></a></p>
+<h3 id="4.11.1)-Definition">4.11.1) Definition<a class="anchor-link" href="#4.11.1)-Definition">&#182;</a></h3><ul>
+<li><u><strong>Spearman's Rank Correlation Coefficient</strong></u> <strong>:</strong> is a non-parametric measure of the strength and direction of the association between two ranked variables. It assesses how well the relationship between two variables can be described using a monotonic function. Spearman's correlation coefficient is denoted by $\rho$ (rho) or $r_s$. Here's a step-by-step explanation:</li>
+</ul>
+<ol>
+<li><p><strong>Combine the Samples :</strong> First, combine all the observations from both variables into a single sample.</p>
+</li>
+<li><p><strong>Rank the Observations :</strong> Assign ranks to the combined sample. The smallest observation gets rank 1, the next smallest gets rank 2, and so on. If there are tied values (observations with the same value), each tied value is assigned the average of the ranks they would have received if they were not tied.</p>
+</li>
+<li><p><strong>Calculate the Differences :</strong> For each pair of observations, calculate the difference between their ranks.</p>
+</li>
+<li><p><strong>Square the Differences :</strong> Square each of the rank differences.</p>
+</li>
+<li><p><strong>Sum of Squared Differences :</strong> Calculate the sum of the squared rank differences, denoted as $ d_i^2 $.</p>
+</li>
+<li><p><strong>Spearman's Rank Correlation Coefficient Formula :</strong> Use the formula to calculate the Spearman's rank correlation coefficient $ r_s $:</p>
+</li>
+</ol>
+$$
+r_s = 1 - \frac{{6 \sum d_i^2}}{{n(n^2 - 1)}}
+$$<p>where $d_i$ is the difference between ranks for each pair of observations, and $n$ is the number of observations.</p>
+<ol start="7">
+<li><strong>Interpret the Result :</strong> The value of $ r_s$ will range between -1 and 1. An $ r_s $ close to 1 indicates a strong positive monotonic relationship, while an $r_s$ close to -1 indicates a strong negative monotonic relationship. An $ r_s $ close to 0 suggests no monotonic relationship.</li>
+</ol>
+<p>Spearman correlation is the non-parametric counterpart to the Pearson correlation and is used when the assumptions of Pearson correlation are not met, such as non-normality or ordinal data.</p>
+<h4 id="Interpretation">Interpretation<a class="anchor-link" href="#Interpretation">&#182;</a></h4><ul>
+<li>$r_s = 1$ : Perfect positive monotonic relationship</li>
+<li>$ r_s = -1 $ : Perfect negative monotonic relationship</li>
+<li>$ r_s = 0 $ : No monotonic relationship</li>
+<li>$ 0 &lt; r_s &lt; 1 $ : Positive monotonic relationship</li>
+<li>$ -1 &lt; r_s &lt; 0 $ : Negative monotonic relationship</li>
+</ul>
+<h4 id="Assumptions">Assumptions<a class="anchor-link" href="#Assumptions">&#182;</a></h4><ol>
+<li><strong>Monotonicity :</strong> The relationship between the two variables should be monotonic (either consistently increasing or consistently decreasing).</li>
+<li><strong>Ordinal, Interval, or Ratio Data :</strong> The data can be ordinal, interval, or ratio, but the relationship must be monotonic.</li>
+</ol>
+<h4 id="Hypotheses">Hypotheses<a class="anchor-link" href="#Hypotheses">&#182;</a></h4><ul>
+<li><strong>Null Hypothesis $(H_0)$ :</strong> There is no monotonic relationship between the two variables ($\rho = 0$).</li>
+<li><strong>Alternative Hypothesis $(H_1)$ :</strong> There is a monotonic relationship between the two variables ($ \rho \neq 0 $).</li>
+</ul>
+<h4 id="Test-Statistic">Test Statistic<a class="anchor-link" href="#Test-Statistic">&#182;</a></h4><p>The test statistic for Spearman correlation is calculated as:</p>
+$$
+\rho = 1 - \frac{{6 \sum d_i^2}}{{n(n^2 - 1)}}
+$$<p>where $d_i $ is the difference between the ranks of corresponding values and $ n$ is the number of pairs.</p>
+<h4 id="p-Value">p-Value<a class="anchor-link" href="#p-Value">&#182;</a></h4><p>To test the significance of the Spearman correlation, the t-distribution is used:</p>
+$$
+t = \frac{r_s \sqrt{n-2}}{\sqrt{1-r_s^2}}
+$$<p>The degrees of freedom (df) are calculated as:</p>
+$$
+df = n - 2
+$$<p><a id="4.11.2"></a></p>
+<h3 id="4.11.2)-Example-of-Spearman-Correlation">4.11.2) Example of Spearman Correlation<a class="anchor-link" href="#4.11.2)-Example-of-Spearman-Correlation">&#182;</a></h3><p><img src="customer.jpg" alt="" /></p>
+<p>Suppose a researcher wants to examine the relationship between the ranks of customer satisfaction and the ranks of customer loyalty in a study of various companies. The following ranks are collected:</p>
+<table>
+<thead>
+<tr>
+  <th>Company</th>
+  <th>Satisfaction Rank</th>
+  <th>Loyalty Rank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>A</td>
+  <td>8</td>
+  <td>7</td>
+</tr>
+<tr>
+  <td>B</td>
+  <td>6</td>
+  <td>5</td>
+</tr>
+<tr>
+  <td>C</td>
+  <td>3</td>
+  <td>2</td>
+</tr>
+<tr>
+  <td>D</td>
+  <td>9</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>E</td>
+  <td>5</td>
+  <td>4</td>
+</tr>
+<tr>
+  <td>F</td>
+  <td>7</td>
+  <td>6</td>
+</tr>
+<tr>
+  <td>G</td>
+  <td>2</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>H</td>
+  <td>4</td>
+  <td>3</td>
+</tr>
+<tr>
+  <td>I</td>
+  <td>10</td>
+  <td>9</td>
+</tr>
+<tr>
+  <td>J</td>
+  <td>1</td>
+  <td>10</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1.-Defining-Hypotheses"><u>1. Defining Hypotheses</u><a class="anchor-link" href="#1.-Defining-Hypotheses">&#182;</a></h4><ul>
+<li>Null Hypothesis $ H_0 $ : &quot;There is no monotonic relationship between customer satisfaction ranks and customer loyalty ranks&quot;</li>
+</ul>
+$$H_0 : \rho = 0$$<ul>
+<li>Alternative Hypothesis $ H_1 $ : &quot;There is a monotonic relationship between customer satisfaction ranks and customer loyalty ranks&quot;</li>
+</ul>
+$$H_1 : \rho \neq 0$$<h4 id="2.-Assumption-Check"><u>2. Assumption Check</u><a class="anchor-link" href="#2.-Assumption-Check">&#182;</a></h4><ul>
+<li><p><strong>Monotonicity :</strong></p>
+<p>$H_0 :$ &quot;The relationship between customer satisfaction and customer loyalty ranks is monotonic&quot;</p>
+<p>$H_1 :$ &quot;The relationship between customer satisfaction and customer loyalty ranks is <strong>NOT</strong> monotonic&quot;</p>
+</li>
+</ul>
+<h4 id="3.-Python-Implementation"><u>3. Python Implementation</u><a class="anchor-link" href="#3.-Python-Implementation">&#182;</a></h4><p>Let's calculate the Spearman correlation coefficient using Python:</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">spearmanr</span>
+
+<span class="c1"># Data</span>
+<span class="n">satisfaction_ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">loyalty_ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># Calculate Spearman correlation</span>
+<span class="n">rho</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">spearmanr</span><span class="p">(</span><span class="n">satisfaction_ranks</span><span class="p">,</span> <span class="n">loyalty_ranks</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Spearman correlation coefficient: </span><span class="si">{</span><span class="n">rho</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reject the null hypothesis&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fail to reject the null hypothesis&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Spearman correlation coefficient: 0.4545
+P-value: 0.1869
+Fail to reject the null hypothesis
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="4.-Decision-and-Conclusion"><u>4. Decision and Conclusion</u><a class="anchor-link" href="#4.-Decision-and-Conclusion">&#182;</a></h4><p>Based on the calculated Spearman correlation coefficient and p-value:</p>
+<p>Spearman correlation coefficient: 0.4424</p>
+<p>P-value: 0.1869</p>
+<p>At a significance level of 0.05, with a Spearman correlation coefficient of 0.4424, we fail to reject the null hypothesis ($H_0: \rho = 0$). Therefore, there is insufficient evidence to conclude a significant monotonic relationship between the ranks of customer satisfaction and customer loyalty in this study.</p>
 
 </div>
 </div>
