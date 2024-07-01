@@ -6,6 +6,8 @@
 
 # <u>**Author</u> :** [Younes Dahami](https://www.linkedin.com/in/dahami/)
 
+# What this video also : https://www.youtube.com/watch?v=wGPEy9ewq34
+
 # <a id="top"></a>
 # 
 # <div class="list-group" id="list-tab" role="tablist">
@@ -19,9 +21,11 @@
 # 
 # <font color="blue" size=+1><b>[3. Hypothesis Testing](#3)</b></font>
 # * [3.1 Defining Hypotheses](#3.1)
-# * [3.2 Assumption Check](#3.2) 
-# * [3.3 Selecting the Proper Test](#3.3)
-# * [3.4 Decision and Conclusion](#3.4)
+# * [3.2 Assumption Check](#3.2)
+# * [3.3 Checking for Normality](#3.3)
+# * [3.4 Checking for Homoscedasticity](#3.4)    
+# * [3.5 Selecting the Proper Test](#3.5)
+# * [3.6 Decision and Conclusion](#3.6)
 #     
 #     
 # <font color="blue" size=+1><b>[4. Tests Examples](#4)</b></font>
@@ -79,7 +83,22 @@
 # 
 # Of course you still have to check if there are further assumptions for the respective test. But in general, there are less assumptions for non-parametric tests than for parametric tests.
 # 
-# Parametric tests are generally mor powerful than non-parametric tests.
+# Parametric tests are generally more powerful than non-parametric tests.
+
+# ## About Scale of Measurement
+# 
+# In statistics, the scale of measurement refers to the different ways in which variables can be quantified and categorized. There are four primary scales of measurement: **nominal, ordinal, interval,** and **ratio.**
+# 
+# * **Nominal Scale :** Data are categorized without any order or ranking. Examples: Gender (male, female), Marital status (single, married, divorced).
+# 
+# * **Ordinal Scale :** Data are categorized with a meaningful order, but the intervals between categories are not necessarily equal. Examples: Socioeconomic status (low, middle, high), Education level (high school, bachelor's, master's, Ph.D.).
+# 
+# * **Interval Scale :** Data are ordered, and the intervals between data points are equal and meaningful.
+# However, there is no true zero point (i.e., zero does not indicate the absence of the quantity being measured). Examples: Temperature in Celsius or Fahrenheit, IQ scores.
+# 
+# * **Ratio Scale :** Data have all the properties of an interval scale, but also have a true zero point, which indicates the absence of the quantity being measured. Examples: Height, weight, age, income.
+# 
+# 
 
 # <a id="1"></a>
 # 
@@ -91,7 +110,14 @@
 # 
 # * **Assumption of Normality :** Data should be normally distributed or approximately normally distributed.
 # * **Homogeneity of Variances :** Assumes equal variances among the groups being compared.
-# * **Scale of Measurement :** Typically requires data that is at least interval scale.
+# * **Scale of Measurement :** Typically requires data that is at least interval scale, meaning that the data should have :
+# 
+#     * Equal intervals between values, ensuring that the difference between any two values is consistent.
+#     * Meaningful numerical distances between data points.
+# 
+# In other words, the data should be quantitative and should reflect consistent intervals between measurements, allowing for meaningful addition, subtraction, and in some cases, more complex mathematical operations.
+# 
+# This requirement is crucial for parametric tests because these tests rely on calculations involving the mean and standard deviation, which assume that the differences between values are consistent and meaningful.
 # 
 # **<u>Examples</u>** **:** t-tests (independent and paired), ANOVA (Analysis of Variance), and linear regression.
 
@@ -132,13 +158,21 @@
 # <a id="3.1"></a>
 # ## 3.1) Defining Hypotheses
 # 
-# First, we need to identify the scientific question we aim to answer and formulate it as the Null Hypothesis $(H_0)$ and the Alternative Hypothesis ($H_{1}$ or $H_{a}$). Remember that $(H_0)$ and $H_{1}$ must be mutually exclusive, and $H_{1}$ should not include equality :
+# First, we need to identify the scientific question we aim to answer and formulate it as the Null Hypothesis $(H_0)$ and the Alternative Hypothesis ($H_{1}$ or $H_{a}$).
 # 
-# $H_0 : \mu = x, H_{1}: μ \neq x$
-# 
-# $H_0 : \mu \leq x, H_{1}: μ > x$
-# 
-# $H_0 : \mu \geq x, H_{1}: μ < x$
+# * **Null Hypothesis $H_0$ :** A default hypothesis that there is no effect or no difference. It is the hypothesis that the test seeks to reject.
+# * **Alternative Hypothesis $H_{1}$ :** The hypothesis that there is an effect or a difference.
+#  
+# Remember that $H_0$ and $H_{1}$ **must be mutually exclusive,** and $H_{1}$ should not include equality :
+# <center>
+# $H_0 : \mu = x,\quad\quad H_{1}: μ \neq x$
+# </center>
+# <center>
+# $H_0 : \mu \leq x,\quad\quad H_{1}: μ > x$
+# </center>
+# <center>
+# $H_0 : \mu \geq x,\quad\quad H_{1}: μ < x$
+# </center>
 # 
 # <a id="3.2"></a>
 # ## 3.2) Assumption Check
@@ -149,18 +183,313 @@
 # * Observations in each sample are normally distributed.
 # * Observations in each sample have the same variance.
 # 
-# <a id="3.3"></a>
-# ## 3.3) Selecting the Proper Test
 # 
-# Next, we need to choose the appropriate test. It's crucial to analyze the number of groups being compared and whether the data are paired or not. To determine if the data are matched, consider whether the data were collected from the same individuals. Based on these factors, you can select the appropriate test using the chart below.
+# <a id="3.3"></a>
+# ## 3.3) Checking for Normality
+# 
+# ### For Small Samples
+# For small sample sizes (typically $n \leq 50$), the Shapiro-Wilk test is often recommended due to its strong power in detecting deviations from normality. The Shapiro-Wilk test evaluates the null hypothesis that the data was drawn from a normally distributed population.
+# 
+# **Steps :**
+# 1. **Shapiro-Wilk Test**:
+#    - Conduct the Shapiro-Wilk test.
+#    - The null hypothesis ($H_0$) states that the sample comes from a normal distribution.
+#    - A low p-value (typically $\leq 0.05$) indicates that the null hypothesis can be rejected, suggesting the data is not normally distributed.
+# 
+# ### For Large Samples
+# For larger sample sizes, other tests such as the Kolmogorov-Smirnov test, Anderson-Darling test, and Jarque-Bera test are more suitable due to their ability to handle larger datasets and focus on different aspects of the distribution.
+# 
+# **Steps:**
+# 1. **Kolmogorov-Smirnov (K-S) Test**:
+#    - Compares the sample distribution with a normal distribution.
+#    - The null hypothesis ($H_0$) states that the sample comes from a specified distribution.
+# 
+# 2. **Anderson-Darling Test**:
+#    - An enhancement of the K-S test, giving more weight to the tails of the distribution.
+#    - Provides critical values for different significance levels to help assess normality.
+# 
+# 3. **Jarque-Bera Test**:
+#    - Based on sample skewness and kurtosis.
+#    - The null hypothesis ($H_0$) states that the data has skewness and kurtosis matching a normal distribution.
+# 
+# ### Visual Inspection
+# In addition to formal tests, visual inspection methods can provide valuable insights into the distribution of the data:
+# 1. **Histogram with KDE (Kernel Density Estimate)**:
+#    - Provides a visual representation of the data distribution.
+#    - Helps identify any skewness or kurtosis visually.
+#    
+# 2. **Q-Q Plot (Quantile-Quantile Plot)**:
+#    - Plots the quantiles of the data against the quantiles of a normal distribution.
+#    - If the data is normally distributed, the points should fall approximately along a straight line.
+# 
+# <a id="3.4"></a>
+# ## 3.4) Checking for Homoscedasticity
+# 
+# Homoscedasticity refers to the assumption that the variance of errors or residuals is constant across all levels of the independent variable(s). It is a key assumption in regression analysis.
+# 
+# ### For Both Small and Large Samples
+# There are three common tests for checking homoscedasticity: the Breusch-Pagan test, the White test, and Levene's test.
+# 
+# **Steps:**
+# 1. **Breusch-Pagan Test**:
+#    - Tests the null hypothesis ($H_0$) that the variance of the errors is constant.
+#    - A low p-value (typically $\leq 0.05$) indicates heteroscedasticity (variance is not constant).
+# 
+# 2. **White Test**:
+#    - Similar to the Breusch-Pagan test but more general, as it does not assume a specific form for the heteroscedasticity.
+#    - Tests the null hypothesis ($H_0$) that the variance of the errors is constant.
+# 
+# 3. **Levene's Test**:
+#    - Tests the null hypothesis ($H_0 $) that the variances are equal across groups.
+#    - More robust to non-normal distributions compared to other tests.
+#    - A low p-value (typically $\leq 0.05$) indicates that the variances are not equal (heteroscedasticity).
+# 
+# ### Visual Inspection
+# Visual methods can also be employed to check for homoscedasticity:
+# 1. **Residuals vs Fitted Plot**:
+#    - Plots the residuals against the fitted values.
+#    - If the variance is constant, the plot should show no clear pattern.
+#    
+# 2. **Histogram of Residuals**:
+#    - Helps visualize the distribution of residuals.
+#    - Ideally, the residuals should be normally distributed with constant variance.
+# 
+# By using both formal tests and visual inspection, you can effectively check for normality and homoscedasticity in your data, ensuring the assumptions for parametric tests are met.
+# 
+
+# In[1]:
+
+
+# Import necessary libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.stats import shapiro, kstest, normaltest, anderson, jarque_bera
+from statsmodels.graphics.gofplots import qqplot
+from statsmodels.stats.diagnostic import het_breuschpagan, het_white
+import statsmodels.api as sm
+
+import warnings
+warnings.filterwarnings("ignore") 
+
+# Setting the style for plots
+sns.set(style="whitegrid")
+
+# Helper function to create example data
+def create_example_data(size, mean=0, std=1):
+    return np.random.normal(mean, std, size)
+
+# Checking Normality
+## For Small Samples
+def check_normality_small_sample(data):
+    print("Shapiro-Wilk Test:")
+    stat, p = shapiro(data)
+    print(f'Statistic: {stat}, p-value: {p}')
+    return stat, p
+
+## For Large Samples
+def check_normality_large_sample(data):
+    print("Kolmogorov-Smirnov Test:")
+    stat, p = kstest(data, 'norm', args=(np.mean(data), np.std(data)))
+    print(f'Statistic: {stat}, p-value: {p}')
+    
+    print("\nAnderson-Darling Test:")
+    result = anderson(data)
+    print(f'Statistic: {result.statistic}')
+    for i in range(len(result.critical_values)):
+        sl, cv = result.significance_level[i], result.critical_values[i]
+        print(f'Significance Level: {sl}, Critical Value: {cv}')
+    
+    print("\nJarque-Bera Test:")
+    stat, p = jarque_bera(data)
+    print(f'Statistic: {stat}, p-value: {p}')
+    return stat, p
+
+# Plotting Data for Visual Inspection
+def plot_normality(data):
+    plt.figure(figsize=(12, 6))
+    
+    plt.subplot(1, 2, 1)
+    sns.histplot(data, kde=True)
+    plt.title("Histogram with KDE")
+    
+    plt.subplot(1, 2, 2)
+    qqplot(data, line='s')
+    plt.title("Q-Q Plot")
+    
+    plt.show()
+
+# Checking Homoscedasticity
+## For Both Small and Large Samples
+def check_homoscedasticity(X, y):
+    X = sm.add_constant(X)  # adding a constant for the intercept term
+    model = sm.OLS(y, X).fit()
+    residuals = model.resid
+    
+    print("Breusch-Pagan Test:")
+    bp_test = het_breuschpagan(residuals, X)
+    labels = ['LM Statistic', 'LM-Test p-value', 'F-Statistic', 'F-Test p-value']
+    print(dict(zip(labels, bp_test)))
+    
+    print("\nWhite Test:")
+    white_test = het_white(residuals, X)
+    print(dict(zip(labels, white_test)))
+    
+    # Plotting Residuals
+    plt.figure(figsize=(12, 6))
+    plt.subplot(1, 2, 1)
+    sns.residplot(x=X[:, 1], y=residuals, lowess=True, line_kws={'color': 'red'})
+    plt.title("Residuals vs Fitted")
+    
+    plt.subplot(1, 2, 2)
+    sns.histplot(residuals, kde=True)
+    plt.title("Histogram of Residuals")
+    
+    plt.show()
+
+# Example usage
+if __name__ == "__main__":
+    # Generate example data
+    small_sample_data = create_example_data(30)
+    large_sample_data = create_example_data(500)
+    
+    # Check normality for small sample
+    print("Normality Check for Small Sample:")
+    check_normality_small_sample(small_sample_data)
+    plot_normality(small_sample_data)
+    
+    # Check normality for large sample
+    print("\nNormality Check for Large Sample:")
+    check_normality_large_sample(large_sample_data)
+    plot_normality(large_sample_data)
+    
+    # Generate example data for homoscedasticity check
+    X = np.random.rand(100, 1) * 100
+    y = 3 * X.squeeze() + np.random.randn(100) * 10
+    
+    # Check homoscedasticity
+    print("\nHomoscedasticity Check:")
+    check_homoscedasticity(X, y)
+
+
+# In[2]:
+
+
+# Import necessary libraries
+import numpy as np
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+
+# Example data
+group1 = np.random.normal(50, 10, 100)  # Group 1 with mean 50 and std 10
+group2 = np.random.normal(60, 15, 100)  # Group 2 with mean 60 and std 15
+group3 = np.random.normal(55, 20, 100)  # Group 3 with mean 55 and std 20
+
+# Perform Levene's test
+stat, p = stats.levene(group1, group2, group3)
+
+# Print the test statistic and p-value
+print(f'Levene’s Test Statistic: {stat}')
+print(f'p-value: {p}')
+
+# Interpretation of the result
+alpha = 0.05
+if p < alpha:
+    print("The variances are significantly different (reject H0)")
+else:
+    print("The variances are not significantly different (fail to reject H0)")
+
+# Optional: Plotting the data
+plt.figure(figsize=(10, 6))
+plt.boxplot([group1, group2, group3], labels=['Group 1', 'Group 2', 'Group 3'])
+plt.title("Boxplot of the Groups")
+plt.ylabel("Values")
+plt.show()
+
+
+# ### Post-Hoc Test for Unequal Variances
+
+# When Levene's test (or another test for equality of variances) indicates that the variances are significantly different, we can perform post-hoc tests to determine which specific groups have different variances. One such post-hoc test is the **Games-Howell post-hoc test,** which is designed for situations where variances are unequal and the sample sizes are unequal.
+# 
+# Here is an example of how to perform the Games-Howell post-hoc test in Python using the `pingouin` library :
+
+# In[3]:
+
+
+# Install necessary library
+#!pip install pingouin
+
+
+# In[4]:
+
+
+# Import necessary libraries
+import numpy as np
+import pingouin as pg
+import pandas as pd
+
+# Example data
+data = {
+    'value': np.concatenate([np.random.normal(50, 10, 100), 
+                             np.random.normal(60, 15, 100), 
+                             np.random.normal(55, 20, 100)]),
+    'group': np.concatenate([['Group 1'] * 100, 
+                             ['Group 2'] * 100, 
+                             ['Group 3'] * 100])
+}
+
+df = pd.DataFrame(data)
+
+# Perform Levene's test
+stat, p = stats.levene(df[df['group'] == 'Group 1']['value'], 
+                       df[df['group'] == 'Group 2']['value'], 
+                       df[df['group'] == 'Group 3']['value'])
+
+print(f'Levene’s Test Statistic: {stat}')
+print(f'p-value: {p}')
+
+# Interpretation of the result
+alpha = 0.05
+if p < alpha:
+    print("The variances are significantly different (reject H0)")
+else:
+    print("The variances are not significantly different (fail to reject H0)")
+
+# Perform Games-Howell post-hoc test
+posthoc = pg.pairwise_gameshowell(data=df, dv='value', between='group')
+print(posthoc)
+
+# Optional: Plotting the data
+import matplotlib.pyplot as plt
+plt.figure(figsize=(10, 6))
+plt.boxplot([df[df['group'] == 'Group 1']['value'], 
+             df[df['group'] == 'Group 2']['value'], 
+             df[df['group'] == 'Group 3']['value']], 
+            labels=['Group 1', 'Group 2', 'Group 3'])
+plt.title("Boxplot of the Groups")
+plt.ylabel("Values")
+plt.show()
+
+
+# From the posthoc table, we can say that Group 2 and Group 3 variances are not significantly different.
+
+# <a id="3.5"></a>
+# ## 3.5) Selecting the Proper Test
+# 
+# Next, we need to choose the appropriate test. It's crucial to analyze the **number of groups being compared** and **whether the data are paired or not.** To determine if the data are matched, consider **whether the data were collected from the same individuals.** Based on these factors, you can select the appropriate test using the chart below.
 # 
 # 
 # ![alt](tests_table.png)
 # 
-# <a id="3.4"></a>
-# ## 3.4) Decision and Conclusion
+# <a id="3.6"></a>
+# ## 3.6) Decision and Conclusion
 # 
 # After performing hypothesis testing, we obtain a **p-value** that indicates the significance of the test.
+# 
+# * **p-value :** is the probability of obtaining test results at least as extreme as the observed results, assuming that the null hypothesis is true. It quantifies how well the observed data fit the null hypothesis.
+# 
+# * **Threshold ($\alpha$-level)/The significance level ($\alpha$) :** is a pre-determined threshold set by the researcher, often 0.05.
 # 
 # If the p-value is smaller than the alpha level (the significance level $\alpha$), there is enough evidence to reject $H_0$. Otherwise, we fail to reject $H_0$. Remember, rejecting $H_0$ supports $H_{1}$, but failing to reject $H_0$ does not confirm $H_0$'s validity nor does it indicate that $H_{1}$ is incorrect.
 # 
@@ -187,8 +516,8 @@
 # 
 # #### Hypotheses
 # 
-# - **Null Hypothesis $(H_0)$**: The means of the two groups are equal $(\mu_1 \leq \mu_2).$
-# - **Alternative Hypothesis $(H_1)$**: The means of the two groups are not equal $(\mu_1 \neq \mu_2).$ for a two-tailed test, or $(\mu_1 > \mu_2).$ or $(\mu_1 < \mu_2).$ for a one-tailed test.
+# - **Null Hypothesis $(H_0)$**: The means of the two groups are equal $(\mu_1 = \mu_2).$
+# - **Alternative Hypothesis $(H_1)$**: The means of the two groups are not equal for a two-tailed test $(\mu_1 \neq \mu_2)$, or $(\mu_1 > \mu_2)$ or $(\mu_1 < \mu_2)$ for a one-tailed test.
 # 
 # #### Test Statistic
 # 
@@ -220,7 +549,7 @@
 # 
 # asynchronous = [76.9, 71.3, 91.4, 71.5, 75.3, 84.9, 68.1, 70.5, 75.7, 71.2, 65.9, 72.4, 71.1, 78.5]
 # 
-# Perform hypothesis testing to determine the statistical significance of the professor's belief, using a significance level of 0.05 to assess the null and alternative hypotheses. Before conducting hypothesis testing, verify the relevant assumptions. Provide commentary on the obtained results.
+# Let's perform hypothesis testing to determine the statistical significance of the professor's belief, using a significance level of 0.05 to assess the null and alternative hypotheses. But before conducting hypothesis testing, let's verify the relevant assumptions, and provide commentary on the obtained results.
 # 
 # #### <u>1. Defining Hypotheses</u>
 # 
@@ -242,20 +571,22 @@
 # 
 # #### <u>2. Assumption Check</u>
 # 
-# * Null Hypothesis $(H_0) :$ The data is normally distributed.
-# * Alternative Hypothesis $(H_1) :$ The data is not normally distributed.
+# * **Normality :**
+# 
+#     * Null Hypothesis $(H_0) :$ The data is normally distributed.
+#     * Alternative Hypothesis $(H_1) :$ The data is not normally distributed.
 # 
 # Assuming $\alpha=0.05,$ if the p-value is $>0.05,$ we can conclude that the data is normally distributed.
 # For assessing normality, I employed the **Shapiro-Wilk test,** which is typically favored for smaller samples. However, other options such as the Kolmogorov-Smirnov and D’Agostino and Pearson’s tests are available. Please refer to [stats](https://docs.scipy.org/doc/scipy/reference/stats.html)'s documentation for further details.
 
-# In[1]:
+# In[5]:
 
 
 import numpy as np
 from scipy import stats
 
 
-# In[2]:
+# In[6]:
 
 
 def normality_check(data):
@@ -263,13 +594,13 @@ def normality_check(data):
     
     test_stat_normality, p_value_normality=stats.shapiro(data)
     print("p value:%.4f" % p_value_normality)
-    if p_value_normality <0.05:
+    if p_value_normality < 0.05:
         print("Reject null hypothesis => The data is not normally distributed")
     else:
         print("Fail to reject null hypothesis => The data is normally distributed")
 
 
-# In[3]:
+# In[7]:
 
 
 sync = np.array([93.2, 85.3, 82.9, 68.5, 79.9, 80.6, 80.9, 77.2, 81.5, 79.1, 72.3, 88.1, 86.8,
@@ -283,26 +614,26 @@ normality_check(asyncr)
 # 
 # $H_1 :$ The variances of the samples are different.
 
-# In[4]:
+# In[8]:
 
 
 def variance_check_homogeneity(group1, group2):
     """Checks if two samples have the same variance"""
     
-    test_stat_var, p_value_var= stats.levene(group1,group2)
+    test_stat_var, p_value_var = stats.levene(group1,group2)
     print("p value:%.4f" % p_value_var)
-    if p_value_var <0.05:
+    if p_value_var < 0.05:
         print("Reject null hypothesis => The variances of the samples are different.")
     else:
         print("Fail to reject null hypothesis => The variances of the samples are same.")
 
 
-# It tests the null hypothesis that the population variances are equal, a concept known as **homogeneity of variance**b or **homoscedasticity.** If the resulting p-value from Levene’s test is less than the significance level (typically 0.05), it suggests that the observed differences in sample variances are unlikely to have occurred due to random sampling from a population with equal variances.
+# It tests the null hypothesis that the population variances are equal, a concept known as **homogeneity of variance** or **homoscedasticity.** If the resulting p-value from Levene’s test is less than the significance level (typically 0.05), it suggests that the observed differences in sample variances are unlikely to have occurred due to random sampling from a population with equal variances.
 # 
 # I used Levene’s test to check for variance homogeneity, but you can also use Bartlett’s test. For more information, visit: [scipy.stats.bartlett](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bartlett.html#scipy.stats.bartlett)'s documentation.
 # 
 
-# In[5]:
+# In[9]:
 
 
 variance_check_homogeneity(sync, asyncr)
@@ -310,9 +641,9 @@ variance_check_homogeneity(sync, asyncr)
 
 # #### <u>3. Selecting the proper test</u>
 # 
-# Since the assumptions are satisfied, we can proceed with the parametric version of the test for two groups with unpaired data.
+# Since the assumptions are satisfied, we can proceed with the parametric version of the test for two groups with unpaired data, which is **two-sample t-test**. For that, we use `scipy.stats`'s `ttest_ind`.
 
-# In[6]:
+# In[10]:
 
 
 ttest, p_value = stats.ttest_ind(sync, asyncr)
@@ -324,7 +655,7 @@ else :
     print("Fail to reject the Null Hypothesis")
 
 
-# In[7]:
+# In[11]:
 
 
 ttest
@@ -343,8 +674,8 @@ ttest
 # 
 # * <u>**Analysis of Variance (ANOVA)**</u> **:** is a statistical method used to compare the means of three or more independent groups to determine if there are statistically significant differences between them. ANOVA tests the null hypothesis that the means of the groups are equal. The types of ANOVA are :
 # 
-# 1. **One-Way ANOVA :** Compares the means of three or more independent groups.
-# 2. **Two-Way ANOVA :** Analyzes the effects of two categorical independent variables on a continuous dependent variable.
+# 1. **One-Way ANOVA :** Compares the means of one continuous dependent variable based on $\geq 3$ groups of one categorical variable.
+# 2. **Two-Way ANOVA :** Compares the means of one continuous dependent variable based of $\geq 3$ groups of $2$ categorical variables.
 # 3. **Repeated Measures ANOVA :** Analyzes the effects of one or more within-subjects factors (repeated measures) on a continuous dependent variable.
 # 
 # 
@@ -392,7 +723,7 @@ ttest
 # 
 # both = [975.3, 658.1, 862.5, 708.9, 719.2, 718.4, 760.7, 893.1, 868.9, 806.3, 764.2, 802.7, 791.4, 874.5, 741.2, 797.8, 789.1, 794.3, 822.1, 820.3, 928.4, 793.5, 949.6]
 # 
-# Based on this information, conduct hypothesis testing to determine whether there is a difference in the average monthly weight gain among the three groups, using a significance level of 0.05. If a significant difference is found, perform further analysis to identify the cause of the difference. Before conducting hypothesis testing, verify the relevant assumptions.
+# Based on this information, let's conduct a hypothesis testing to determine whether there is a difference in the average monthly weight gain among the three groups, using a significance level of 0.05. If a significant difference is found, we'll perform further analysis to identify the cause of the difference. But before conducting hypothesis testing, let's verify the relevant assumptions.
 # 
 # #### <u>1. Defining Hypotheses</u>
 # 
@@ -418,7 +749,7 @@ ttest
 # 
 # $H_1 :$ "The variances of the samples are different"
 
-# In[8]:
+# In[12]:
 
 
 breast_only = np.array([783.2, 720.1, 990.3, 725.4, 759.2, 905.6, 662.5, 691.4, 765.2, 718.6, 631.9, 732.8, 716.3, 808.9, 585.7, 682.3, 863.5])
@@ -426,7 +757,7 @@ formula_only = np.array([900.1, 880.3, 938.4, 965.1, 958.7, 1060.2, 1047.8, 978.
 both = np.array( [975.3, 658.1, 862.5, 708.9, 719.2, 718.4, 760.7, 893.1, 868.9, 806.3, 764.2, 802.7, 791.4, 874.5, 741.2, 797.8, 789.1, 794.3, 822.1, 820.3, 928.4, 793.5, 949.6])
 
 
-# In[9]:
+# In[13]:
 
 
 # Normality Check :
@@ -436,7 +767,7 @@ normality_check(formula_only)
 normality_check(both)
 
 
-# In[10]:
+# In[14]:
 
 
 # Homoscedasticity check
@@ -451,9 +782,9 @@ else :
 
 # #### <u>3. Selecting the proper test</u>
 # 
-# Since the assumptions are satisfied, we can proceed with the parametric version of the test for **more than two groups** with **unpaired** data.
+# Since the assumptions are satisfied, we can proceed with the parametric version of the test for **more than two groups** with **unpaired** data, which is ANOVA. For that, we use `scipy.stats`'s `f_oneway`.
 
-# In[11]:
+# In[15]:
 
 
 # Performing One-way ANOVA
@@ -469,17 +800,17 @@ else :
 # 
 # At this significance level (of 0.05), it can be concluded that at least one of the groups has a different average monthly weight gain. To determine which group or groups are causing the difference, we need to conduct a **posthoc test** or **pairwise comparison.**
 # 
-# **Note :** To prevent family-wise p-value inflation, I applied the Bonferroni adjustment. Alternatively, you can explore other options here: [scikit_posthocs.posthoc_ttest documentation](https://scikit-posthocs.readthedocs.io/en/latest/generated/scikit_posthocs.posthoc_ttest.html)
+# **Note :** To prevent family-wise p-value inflation, I applied the [Bonferroni adjustment](https://github.com/Dahamey/Hypothesis-Testing/blob/main/Python/Parametric%20Test%20Vs%20Non-Parametric%20Test/Family-Wise%20P-Value%20Inflation%20and%20Bonferroni%20Adjustment.ipynb). Alternatively, you can explore other options here: [scikit_posthocs.posthoc_ttest documentation](https://scikit-posthocs.readthedocs.io/en/latest/generated/scikit_posthocs.posthoc_ttest.html)
 # 
 # Pairwise T-test for multiple comparisons of independent groups, can be utilized after conducting a parametric ANOVA to perform pairwise comparisons.
 
-# In[12]:
+# In[23]:
 
 
 #pip install scikit-posthocs
 
 
-# In[13]:
+# In[16]:
 
 
 import scikit_posthocs as sp
@@ -495,7 +826,7 @@ df_posthoc.index = groups
 df_posthoc.style.applymap(lambda x: "background-color:red" if x<0.05 else "background-color:white")
 
 
-# At this significance level, it can be concluded that the "only formula" group differs from both the "only breast" and "both" groups.
+# At this significance level, it can be concluded that the "Formula only" group differs from both the "Breast Only" and "Both" groups.
 # 
 
 # <a id="4.3"></a>
@@ -511,7 +842,7 @@ df_posthoc.style.applymap(lambda x: "background-color:red" if x<0.05 else "backg
 # 
 # #### Assumptions
 # 
-# The Mann-Whitney U test does not assume normality or homogeneity of variances. However, it does assume that the observations in each group are independent.
+# The Mann-Whitney U test does not assume normality or homogeneity of variances. However, it does **assume that the observations in each group are independent.**
 # 
 # #### Hypotheses
 # 
@@ -520,7 +851,29 @@ df_posthoc.style.applymap(lambda x: "background-color:red" if x<0.05 else "backg
 # 
 # #### Test Statistic
 # 
-# The test statistic for the Mann-Whitney U test is based on the ranks of the observations in the combined sample of the two groups. The $U$ statistic is calculated as the sum of the ranks of the observations in one group, and it is compared to a critical value to determine statistical significance.
+# The test statistic for the Mann-Whitney U test is based on the ranks of the observations in the combined sample of the two groups. The $U$ statistic is calculated as the sum of the ranks of the observations in one group, and it is compared to a critical value to determine statistical significance. Here's a step by step explanation :
+# 
+# 
+# 1. **Combine the Samples :** First, combine all the observations from both groups into a single sample.
+# 
+# 2. **Rank the Observations :** Assign ranks to the combined sample. The smallest observation gets rank 1, the next smallest gets rank 2, and so on. If there are tied values (observations with the same value), each tied value is assigned the average of the ranks they would have received if they were not tied.
+# 
+# 3. **Sum of Ranks :** Calculate the sum of the ranks for the observations in each group. These are often referred to as $R_1$ and $R_2$.
+# 
+# 4. **U Statistic Calculation :** The U statistic is calculated using the following formulas:
+# 
+#    $$
+#    U_1 = R_1 - \frac{n_1(n_1 + 1)}{2}
+#    $$
+# 
+#    $$
+#    U_2 = R_2 - \frac{n_2(n_2 + 1)}{2}
+#    $$
+# 
+#    where $n_1$ and $n_2$ are the sample sizes of the two groups. The test statistic $U$ is the smaller of $U_1$ and $U_2$.
+# 
+# 5. **Determine the Significance :** The U statistic is then compared to a critical value from the U distribution, or a p-value is calculated. If the p-value is less than the chosen significance level (e.g., 0.05), you reject the null hypothesis that the two samples come from the same distribution.
+# 
 # 
 
 # <a id="4.3.2"></a>
@@ -535,7 +888,7 @@ df_posthoc.style.applymap(lambda x: "background-color:red" if x<0.05 else "backg
 # 
 # developer_team = [2.2, 2.0, 1.5, 2.1, 8.5, 2.3, 3.0, 4.0, 3.5, 2.4, 3.0, 6.0, 12.0, 4.0, 2.0, 1.3, 3.3]
 # 
-# Based on this data, perform hypothesis testing to examine whether there exists a difference in the overtime hours between two teams, utilizing a significance level of 0.05. Before proceeding with hypothesis testing, ensure to verify the associated assumptions.
+# Based on this data, we'll perform hypothesis testing to examine whether there exists a difference in the overtime hours between two teams, utilizing a significance level of 0.05. Buit before proceeding with hypothesis testing, let's ensure to verify the associated assumptions.
 # 
 # #### <u>1. Defining Hypotheses</u>
 # 
@@ -562,7 +915,7 @@ df_posthoc.style.applymap(lambda x: "background-color:red" if x<0.05 else "backg
 # 
 # $H_1 :$ "The variances of the samples are different"
 
-# In[14]:
+# In[17]:
 
 
 tester_team = np.array([6.5, 7.0, 1.8, 2.2, 2.4, 1.9, 1.7, 6.3, 2.6, 2.2, 12.1, 1.6, 5.1, 3.3, 9.0, 2.5, 4.0])
@@ -578,9 +931,9 @@ variance_check_homogeneity(tester_team, developer_team)
 
 # #### <u>3. Selecting the proper test</u>
 # 
-# Since there are two groups with data collected from different individuals, it's **unpaired.** However, the normality assumption is not met. Therefore, we should use the non-parametric version of a two-group comparison for unpaired data, which is the **Mann-Whitney U test.**
+# Since there are two groups with data collected from different individuals, it's **unpaired.** However, the normality assumption is not met. Therefore, we should use the non-parametric version of a two-group comparison for unpaired data, which is the **Mann-Whitney U test.** For that, we use `scipy.stats`'s `mannwhitneyu` function.
 
-# In[15]:
+# In[18]:
 
 
 ttest, p_value = stats.mannwhitneyu(x = tester_team,
@@ -610,7 +963,7 @@ else :
 # 
 # #### Assumptions
 # 
-# The Kruskal-Wallis test does not assume normality or homogeneity of variances. However, it does assume that the observations in each group are independent.
+# The Kruskal-Wallis test does not assume normality or homogeneity of variances. However, it does **assume that the observations in each group are independent.**
 # 
 # #### Hypotheses
 # 
@@ -619,7 +972,28 @@ else :
 # 
 # #### Test Statistic
 # 
-# The test statistic for the Kruskal-Wallis test is based on the ranks of the observations in the combined sample of the groups. It compares the average ranks between groups to determine if there are significant differences.
+# The test statistic for the Kruskal-Wallis test is based on the ranks of the observations in the combined sample of the groups. It compares the average ranks between groups to determine if there are significant differences. Here's a step by step explanation :
+# 
+# 1. **Combine the Samples :** Combine all the observations from all the groups into a single sample.
+# 
+# 2. **Rank the Observations :** Assign ranks to the combined sample. The smallest observation gets rank 1, the next smallest gets rank 2, and so on. If there are tied values (observations with the same value), each tied value is assigned the average of the ranks they would have received if they were not tied.
+# 
+# 3. **Sum of Ranks :** Calculate the sum of the ranks for the observations in each group. Denote the sum of ranks for the $i$-th group as $R_i$.
+# 
+# 4. **Kruskal-Wallis Statistic Calculation**: The Kruskal-Wallis test statistic $H$ is calculated using the formula:
+# 
+#    $$
+#    H = \left( \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} \right) - 3(N+1)
+#    $$
+# 
+#    where:
+#    - $N$ is the total number of observations across all groups.
+#    - $k$ is the number of groups.
+#    - $n_i$ is the number of observations in the $i$-th group.
+#    - $R_i$ is the sum of ranks for the $i$-th group.
+# 
+# 5. **Determine the Significance :** The test statistic $H$ follows a chi-square distribution with $k-1$ degrees of freedom. Compare $H$ to the critical value from the chi-square distribution, or calculate the p-value. If the p-value is less than the chosen significance level (e.g., 0.05), you reject the null hypothesis that the groups have the same distribution.
+# 
 # 
 
 # <a id="4.4.2"></a>
@@ -636,7 +1010,7 @@ else :
 # 
 # Facebook = [2125, 2530, 2110, 2555, 2285, 2375, 2450, 2315, 2180, 2120, 2055, 2435, 2270, 2105, 2535]
 # 
-# Based on this data, perform hypothesis testing to examine whether there are differences in the average customer acquisition across the three platforms, using a significance level of 0.05. Should a significant difference be observed, conduct additional analysis to detect the underlying cause. Prior to hypothesis testing, ensure to validate the relevant assumptions.
+# Based on this data, we'll perform hypothesis testing to examine whether there are differences in the average customer acquisition across the three platforms, using a significance level of 0.05. Should a significant difference be observed, we'll conduct additional analysis to detect the underlying cause. But prior to hypothesis testing, let's ensure to validate the relevant assumptions.
 # 
 # #### <u>1. Defining Hypotheses</u>
 # 
@@ -663,7 +1037,7 @@ else :
 # 
 # $H_1 :$ "The variances of the samples are different"
 
-# In[16]:
+# In[19]:
 
 
 youtube = np.array([1905, 1885, 1945, 2135, 2045, 2125, 2120, 2150, 2030, 1980, 1950, 2140, 2155, 1945, 2135])
@@ -686,9 +1060,9 @@ else :
 
 # #### <u>3. Selecting the proper test</u>
 # 
-# Since the assumptions of normality and variance homogeneity are not met, we should employ the non-parametric version of ANOVA for unpaired data, as the data is collected from different sources, which is the **Kruskal-Wallis test.**
+# Since the assumptions of normality and variance homogeneity are not met, we should employ the non-parametric version of ANOVA for unpaired data, as the data is collected from different sources, which is the **Kruskal-Wallis test.** For that, we use `scipy.stats`'s `kruskal` function.
 
-# In[17]:
+# In[20]:
 
 
 F_test, p_value = stats.kruskal(youtube, instagram, facebook)
@@ -703,9 +1077,9 @@ else :
 # 
 # At this significance level, there is evidence to suggest that at least one of the average customer acquisition numbers differs across the platforms.
 # 
-# **Note :** Due to the non-normality of the data, the **non-parametric version of the posthoc test** is employed.
+# **Note :** Due to the non-normality of the data, the **non-parametric version of the posthoc test** is employed. For that, we use `scikit_posthocs`'s `posthoc_mannwhitney` function.
 
-# In[18]:
+# In[21]:
 
 
 import scikit_posthocs as sp
@@ -720,7 +1094,7 @@ df_posthoc.index = company_names
 df_posthoc.style.applymap(lambda x : "background-color:red" if x<0.05 else "background-color:white")
 
 
-# The average number of customers coming from YouTube is significantly different from the others, being notably smaller.
+# At this significance level, it can be concluded that the average number of customers coming from YouTube is significantly different from the average number of customers coming from Instagram or Facebook, being notably smaller.
 
 # 
 # <a id="4.5"></a>
@@ -736,8 +1110,10 @@ df_posthoc.style.applymap(lambda x : "background-color:red" if x<0.05 else "back
 # #### Assumptions
 # 
 # 1. **Dependent Observations :** The observations in each group should be dependent or paired in some way. Typically, this means that each subject is measured under two different conditions.
-# 2. **Normality :** The differences between pairs of observations should be approximately normally distributed.
-# 3. **Homogeneity of Differences :** The differences between pairs of observations should have a constant variance.
+# 2. **Normality :** The differences between the paired observations (i.e., the difference scores) should be approximately normally distributed. This can be assessed using statistical tests such as the Shapiro-Wilk test or by visual inspection of a Q-Q plot.
+# 3. **Homogeneity of Differences :** The differences between pairs of observations should have a constant variance. . This assumption is less commonly mentioned but ensures that the differences do not show a systematic pattern.
+# 
+# **NOTE :** Homoscedasticity (equal variances) is not an assumption for the Dependent t-Test because it compares the means of two related groups, and thus, between-group variability is not a factor. This is in contrast to the Independent t-Test, where homoscedasticity is an important assumption.
 # 
 # #### Hypotheses
 # 
@@ -764,9 +1140,9 @@ df_posthoc.style.applymap(lambda x : "background-color:red" if x<0.05 else "back
 # 
 # ![](5.jpg)
 # 
-# Eighteen students diagnosed with high cholesterol at the University Health Center were advised by healthcare personnel about the risks associated with high cholesterol and were prescribed a diet program. After one month, the patients returned for a follow-up, during which their cholesterol levels were reevaluated. Test whether there is a change in the cholesterol levels of the patients after the diet intervention.
+# Eighteen students diagnosed with high cholesterol at the University Health Center were advised by healthcare personnel about the risks associated with high cholesterol and were prescribed a diet program. After one month, the patients returned for a follow-up, during which their cholesterol levels were reevaluated to test whether there is a change in the cholesterol levels of the patients after the diet intervention.
 # 
-# Based on this information, perform hypothesis testing to determine whether there is a reduction in the cholesterol levels of the patients following the diet, using a significance level of 0.05. Prior to hypothesis testing, assess the relevant assumptions. Provide commentary on the results.
+# Based on this information, we'll perform hypothesis testing to determine whether there is a reduction in the cholesterol levels of the patients following the diet, using a significance level of 0.05. but prior to hypothesis testing, let's assess the relevant assumptions, and provide commentary on the results.
 # 
 # results_before_diet = [226, 233, 220, 252, 254, 220, 242, 227, 258, 222, 240, 238, 237, 230, 274, 252, 236, 228]
 # 
@@ -804,7 +1180,7 @@ df_posthoc.style.applymap(lambda x : "background-color:red" if x<0.05 else "back
 # $H_1 :$ "The data is **NOT** normally distributed"
 # 
 
-# In[19]:
+# In[23]:
 
 
 before_diet = np.array([226, 233, 220, 252, 254, 220, 242, 227, 258, 222, 240, 238, 237, 230, 274, 252, 236, 228])
@@ -818,9 +1194,9 @@ normality_check(after_diet)
 
 # #### <u>3. Selecting the proper test</u>
 # 
-# The data is paired as it is collected from the same individuals, and the assumptions are satisfied. Therefore, we can employ the **dependent t-test.**
+# The data is paired as it is collected from the same individuals, and the assumptions are satisfied. Therefore, we can employ the **dependent t-test.** For that we use `scipy.stats`'s `ttest_rel` function.
 
-# In[20]:
+# In[25]:
 
 
 # ttest_rel : Calculate the t-test on TWO RELATED samples of scores, a and b.
@@ -870,7 +1246,23 @@ else :
 # 
 # #### Test Statistic
 # 
-# The test statistic for the Wilcoxon Signed-Rank test is based on the ranks of the absolute differences between paired observations. It compares the sum of the positive ranks to the sum of the negative ranks.
+# The test statistic for the Wilcoxon Signed-Rank test is based on the ranks of the absolute differences between paired observations. It compares the sum of the positive ranks to the sum of the negative ranks. Here's a step by step explanation :
+# 
+# 1. **Paired Observations :** First, identify paired observations from your dataset. Each pair consists of two related measurements or observations taken under different conditions, treatments, or times.
+# 
+# 2. **Compute Differences :** Calculate the differences between paired observations. Let $ D_i $ denote the difference between the ith pair of observations.
+# 
+# 3. **Absolute Differences and Ranks :** Compute the absolute differences $|D_i|$ for each pair. Then, rank these absolute differences from smallest to largest, assigning ranks based on their magnitude.
+# 
+# 4. **Sum of Ranks :** Calculate the sum of ranks for the positive and negative signed ranks separately. This involves summing the ranks of $|D_i|$ where $ D_i > 0 $ (positive differences) and where $ D_i < 0 $ (negative differences).
+# 
+# 5. **Test Statistic :** The test statistic $ T^+ $ (for positive differences) or $ T^- $ (for negative differences) is computed based on the smaller of these two sums of ranks. The decision on which test statistic to use depends on whether you are testing for a one-sided or two-sided alternative hypothesis.
+# 
+# 6. **Null Hypothesis :** Formulate the null hypothesis $ H_0 $ and alternative hypothesis $ H_1 $ based on whether the mean/median of the differences is equal to zero (or a specified value) versus not equal to zero.
+# 
+# 7. **Critical Value or p-value :** Determine the critical value from the Wilcoxon Signed-Rank table or compute the p-value using the distribution of $ T^+ $ or $ T^- $ under the null hypothesis.
+# 
+# 8. **Decision :** Compare the computed test statistic with the critical value (for a given significance level) or the p-value. If the test statistic exceeds the critical value or if the p-value is less than the significance level (commonly $ \alpha = 0.05 $), reject the null hypothesis. Otherwise, fail to reject the null hypothesis.
 # 
 
 # <a id="4.6.2"></a>
@@ -879,13 +1271,13 @@ else :
 # 
 # ![](6.png)
 # 
-# A venture capitalist is considering investing in a startup that offers data compression without any loss in quality. However, two competitors, "Pied Piper" and "EndFrame", are also in the market. Initially, she speculated that EndFrame's performance might be superior but wished to verify this before making any investment decisions. Consequently, she provided the same files to each company for compression and recorded their performance scores. The data is provided below.
+# A venture capitalist is considering investing in a startup that offers data compression without any loss in quality. However, two competitors, "Pied Piper" and "EndFrame", are also in the market. Initially, he speculated that EndFrame's performance might be superior but wished to verify this before making any investment decisions. Consequently, he provided the same files to each company for compression and recorded their performance scores. The data is provided below.
 # 
 # pied_piper = [4.55, 4.53, 5.45, 4.65, 5.39, 5.53, 5.51, 5.61, 3.84, 3.95, 5.42, 3.91, 5.29, 5.15, 4.37, 4.26, 5.23]
 # 
 # endframe = [4.25, 3.91, 3.99, 4.05, 3.85, 3.98, 3.98, 3.70, 4.14, 4.08, 3.88, 3.95, 4.06, 3.94, 3.94, 3.75, 4.07]
 # 
-# Based on this data, perform the relevant hypothesis testing using a significance level of 0.05. Prior to conducting the hypothesis testing, ensure to validate the relevant assumptions. Provide commentary on the results afterward.
+# Based on this data, we will perform the relevant hypothesis testing using a significance level of 0.05. But prior to conducting the hypothesis testing, let's ensure to validate the relevant assumptions, and provide commentary on the results afterward.
 # 
 # Since the performance scores are derived from the same set of files, the data is paired.
 # 
@@ -918,7 +1310,7 @@ else :
 # 
 # $H_1 :$ "The data is **NOT** normally distributed"
 
-# In[21]:
+# In[26]:
 
 
 pied_piper = np.array([4.55, 4.53, 5.45, 4.65, 5.39, 5.53, 5.51, 5.61, 3.84, 3.95, 5.42, 3.91, 5.29, 5.15, 4.37, 4.26, 5.23])
@@ -931,9 +1323,9 @@ normality_check(endframe)
 
 # #### <u>3. Selecting the proper test</u>
 # 
-# Since the normality assumption is not met, we should use the non-parametric version of the paired test, which is the **Wilcoxon Signed-Rank test.**
+# Since the normality assumption is not met, we should use the non-parametric version of the paired test, which is the **Wilcoxon Signed-Rank test.** For that we use `scipy.stats`'s `wilcoxon` function.
 
-# In[22]:
+# In[27]:
 
 
 # alternative ="two-sided" by default in stats.wilcoxon
@@ -941,7 +1333,7 @@ test, p_value = stats.wilcoxon(x = endframe, y = pied_piper)
 print("p-value : %.6f"%p_value, "=> one-tailed p-value : %.6f"%(p_value/2))
 
 
-# In[23]:
+# In[28]:
 
 
 # `d` represent the difference between the paired samples: `d = x - y`
@@ -971,8 +1363,9 @@ else :
 # 
 # #### Assumptions
 # 
-# 1. **Continuous Data**: The data should be measured on at least an ordinal scale.
-# 2. **Dependent Observations**: The observations in each group should be dependent or paired in some way.
+# 1. **Ordinal Data :** The data should be measured on an ordinal scale. This means that the measurements can be ranked, but the intervals between the ranks may not be equal.
+# 2. **Dependent Samples :** The test requires that you have a single group of participants or objects that are measured under three or more conditions or treatments. Each participant/object must have been measured under all conditions.
+# 3. **Related Samples Independence :** The observations within each group must be independent of each other, and the groups should be independent of each other as well.
 # 3. **Random Sampling**: The data should be collected through a random sampling method.
 # 
 # 
@@ -983,7 +1376,31 @@ else :
 # 
 # #### Test Statistic
 # 
-# The test statistic for Friedman's Chi-Square Test is based on the ranks of the observations within each group. It compares the mean ranks of the groups to determine if there are significant differences.
+# The test statistic for Friedman's Chi-Square Test is based on the ranks of the observations within each group. It compares the mean ranks of the groups to determine if there are significant differences. Here's a step by step explanation :
+# 
+# 
+# 1. **Ranking Observations :** First, rank the observations within each group separately. The ranks are assigned based on the order of the observations from smallest to largest across all groups.
+# 
+# 2. **Calculate Average Ranks :** Compute the average rank for each group. This is the mean of the ranks assigned to observations within each group.
+# 
+# 3. **Test Statistic :** Calculate the Friedman test statistic $\chi^2$ using the formula:
+#    $$
+#    \chi^2 = \frac{12}{N(k+1)} \left[ \sum_{j=1}^{k} R_j^2 - \frac{N(k+1)^2}{4} \right]
+#    $$
+#    where:
+#    - $N$ is the total number of observations (across all groups).
+#    - $ k$ is the number of groups.
+#    - $ R_j $ is the sum of ranks for group $ j$.
+# 
+# 4. **Degrees of Freedom :** The degrees of freedom $df$ for Friedman's Chi-Square test is $ k-1 $, where $ k$ is the number of groups.
+# 
+# 5. **Null Hypothesis :** Formulate the null hypothesis $ H_0$ and alternative hypothesis $H_1$ based on whether the mean ranks of the groups are equal or not.
+# 
+# 6. **Critical Value or p-value :** Determine the critical value from the Chi-Square distribution table or compute the p-value associated with the Chi-Square statistic under the null hypothesis.
+# 
+# 7. **Decision :** Compare the computed Chi-Square statistic with the critical value (for a given significance level) or compare the p-value with the significance level (commonly $\alpha = 0.05 $). If the test statistic exceeds the critical value or if the p-value is less than $\alpha$, reject the null hypothesis. Otherwise, fail to reject the null hypothesis.
+# 
+# 
 # 
 
 # <a id="4.7.2"></a>
@@ -992,7 +1409,7 @@ else :
 # 
 # ![](7.png)
 # 
-# The researcher wanted to investigate whether there is a difference between the performance of the methodology they developed, $C,$ and the baseline methods $A$ and $B.$ To do this, the researcher conducted various experiments and recorded the achieved accuracy of each method on test sets. The table below displays the accuracy achieved by each method. It's important to note that the same train and test sets were used for each method.
+# The researchers wanted to investigate whether there is a difference between the performance of the methodology they developed, $C,$ and the baseline methods $A$ and $B.$ To do this, the researchers conducted various experiments and recorded the achieved accuracy of each method on test sets. The table below displays the accuracy achieved by each method. It's important to note that the same train and test sets were used for each method.
 # 
 # | Experiment |    A    |    B    |    C    |
 # |------------|---------|---------|---------|
@@ -1006,7 +1423,7 @@ else :
 # | E8         |  89.4   |  89.2   |  90.3   |
 # 
 # 
-# Based on this data, perform hypothesis testing to assess whether there exists a discrepancy in the performance of the methods, utilizing a significance level of 0.05. In case of a significant difference, conduct additional analysis to pinpoint which method is responsible for the disparity. Prior to hypothesis testing, validate the relevant assumptions. Provide commentary on the outcomes.
+# Based on this data, we will perform hypothesis testing to assess whether there exists a discrepancy in the performance of the methods, utilizing a significance level of 0.05. In case of a significant difference, we will conduct additional analysis to pinpoint which method is responsible for the disparity. Bu prior to hypothesis testing, let's validate the relevant assumptions, and provide commentary on the outcomes.
 # 
 # Since the accuracy scores are obtained from the same test sets, the data is paired.
 # 
@@ -1035,7 +1452,7 @@ else :
 # 
 # $H_1 :$ "The variances of the samples are different"
 
-# In[24]:
+# In[29]:
 
 
 import pandas as pd
@@ -1060,7 +1477,7 @@ df.columns = ['Experiment', 'A', 'B', 'C']
 df
 
 
-# In[25]:
+# In[30]:
 
 
 method_A = df["A"].astype("float")
@@ -1088,15 +1505,15 @@ else:
 
 # #### <u>3. Selecting the proper test</u>
 # 
-# There are three groups, but the normality assumption is violated. Therefore, we should use the non-parametric version of ANOVA for paired data, as the accuracy scores are obtained from the same test sets, which is **Friedman $\chi ^2$ test.**
+# There are three groups, but the normality assumption is violated. Therefore, we should use the non-parametric version of ANOVA for paired data, as the accuracy scores are obtained from the same test sets, which is **Friedman $\chi ^2$ test.** For that, we use `scipy.stats`'s `friedmanchisquare` function.
 
-# In[27]:
+# In[31]:
 
 
 test_stat, p_value = stats.friedmanchisquare(method_A, method_B, method_C)
 print("p-value : %.4f"%p_value)
 
-if p_value <0.05:
+if p_value < 0.05:
     print("Reject the null hypothesis")
 else :
     print("Fail to reject the null hypothesis")
@@ -1108,9 +1525,9 @@ print(np.round(np.mean(method_A), 2),"\n", np.round(np.mean(method_B), 2),"\n", 
 # 
 # At this significance level, it is evident that at least one of the methods exhibits a different performance.
 # 
-# **Note :** Due to the non-normality of the data, the **non-parametric version of the posthoc test** is employed.
+# **Note :** Due to the non-normality of the data, the **non-parametric version of the posthoc test** is employed. For that we use `scikit_posthocs`'s `posthoc_wilcoxon` function.
 
-# In[28]:
+# In[32]:
 
 
 import scikit_posthocs as sp
@@ -1126,7 +1543,7 @@ df_posthoc.index = method_names
 df_posthoc.style.applymap(lambda x : "background-color:red" if x<0.05 else "background-color:white")
 
 
-# Method $C$ outperformed the others, achieving higher accuracy scores than both methods $A$ and $B.$
+# At this significance level, it can be concluded that the method $C$ outperformed the others, achieving higher accuracy scores than both methods $A$ and $B.$
 
 # <a id="4.8"></a>
 # 
@@ -1136,11 +1553,13 @@ df_posthoc.style.applymap(lambda x : "background-color:red" if x<0.05 else "back
 # 
 # ## 4.8.1) Definition
 # 
-# * <u>**$\chi^2$ Test for Independence**</u> **:** also called **test for homogeneity,** is a statistical test used to determine whether there is a significant association between two categorical variables. It assesses whether the observed frequencies of the categories differ from the expected frequencies under the assumption of independence between the variables.
+# * <u>**$\chi^2$ Test for Independence**</u> **:** also called **test for homogeneity,** is a statistical test used to determine whether there is a significant association between **two categorical variables.** It assesses whether the observed frequencies of the categories differ from the expected frequencies under the assumption of independence between the variables.
 # 
-# * **Observed Frequencies (O) :** The actual counts observed in each category of the contingency table.
+# * **Observed Frequencies (O) :** These are the actual counts observed in each category of the contingency table.
 # 
-# * **Expected Frequencies (E) :** The counts that would be expected if there were no association between the variables, calculated under the assumption of independence.
+# * **Expected Frequencies (E) :** These are the counts that would be expected if there were no association between the variables, calculated under the assumption of independence.
+# 
+# * **Contingency Table :** also known as a **cross-tabulation** or **crosstab,** is a tabular method in statistics used to summarize and display the relationships between categorical variables. It organizes data into rows and columns where each cell represents the frequency count of a combination of categories from the variables being studied. Contingency tables are especially useful for analyzing and visualizing the association or independence between variables in categorical data analysis.
 # 
 # 
 # #### Assumptions
@@ -1194,7 +1613,7 @@ df_posthoc.style.applymap(lambda x : "background-color:red" if x<0.05 else "back
 # 
 # An analyst at a financial investment company is interested in examining the relationship between gender and risk appetite.
 # 
-# **Risk appetite :** is the amount of risk an organization or investor is willing to take in pursuit of objectives it deems have value.
+# **Risk appetite :** is the amount of risk an organization or investor (like in this example) is willing to take in pursuit of objectives it deems have value.
 # 
 # A random sample of 660 customers was taken from the database. These customers were categorized based on their gender and risk appetite. The results are presented in the table below.
 # 
@@ -1216,7 +1635,7 @@ df_posthoc.style.applymap(lambda x : "background-color:red" if x<0.05 else "back
 # 
 # #### <u>2. Assumption Check and Selecting the proper test</u>
 # 
-# The chi-squared test should be used for this question. This test is known as the Chi-squared test for independence. The assumption for this test, which requires that each expected frequency be at least 5 $(E_i\geq 5)$ in at least 80% of the cells, is satisfied.
+# The chi-squared test should be used for this question. This test is known as the Chi-squared test for independence. The assumption for this test, which requires that each expected frequency be at least 5 $(E_i\geq 5)$ in at least 80% of the cells, is satisfied. For that, we use `scipy.stats`'s `chi2_contingency`.
 
 # In[29]:
 
@@ -1256,6 +1675,7 @@ print("Critical statistic : %.4f"%critical_stat)
 # | ----------------- | ------- | -------------   | ----------------------- |
 # | 2024-02-16       | 1.0     | Younes Dahami   |  initial version |
 # | 2024-05-20       | 1.1     | Younes Dahami   |  details   |
+# | 2024-07-1       | 1.2     | Younes Dahami   |  some definitions additions   |
 
 # In[ ]:
 
